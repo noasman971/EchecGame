@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.*;
 
 public class Game {
+
     public static byte[][] grid = new byte[10][11];
     byte number_player = 4;
     public static byte[] j1 = {3, 5}, j2 = {4, 5}, j3 = {5,5}, j4 = {6, 5};
