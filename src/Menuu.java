@@ -11,48 +11,97 @@ class Menuu {
         System.out.print("CHOOSE WHAT YOU WANT (1-4): ");
     }
 
-    //Method to display the game and ask for the lvl
-    public static void GAME() {
+    public static void  SECONDMENU(){
         Scanner scanner = new Scanner(System.in);
+
+
+        System.out.println("\n--- Lobby ---");
+        System.out.println("1. LOAD GAME");
+        System.out.println("2. CHOOSE LVL");
+        System.out.print("CHOOSE WHAT YOU WANT (1-3):");
+        System.out.println("BACK TO MENU = 3");
+
+        //check if its an integer(entier)
+        short level;
+
+        level = scanner.nextShort();
+
+            switch (level) {
+            case 1:
+                System.out.println("THE GAME Loading ...");
+                break;
+            case 2:
+                Game();
+                break;
+            case 3:
+                Menu();
+                break;
+            }
+
+                while (level < 1 || level > 3) {
+            System.out.println("between 1 and 2 happy idiots.");
+            level = scanner.nextShort();
+                }
+
+
+
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Your stupid but chill, choose between 1 and 3.");
+                    // Detects if the button is invalid
+                    scanner.next();
+                    // Display the menu again
+                    SECONDMENU();
+                    }
+    }
+
+    //Method to display the game and ask for the lvl
+    public static void Game() {
+        Scanner scanner = new Scanner(System.in);
+
 
         //ask for lvl at user
         System.out.println("\n--- SELECT LVL --- ");
         System.out.println("1. Easy");
         System.out.println("2. Medium");
         System.out.println("3. Hard");
-        System.out.print("CHOOSE LEVEL (1-3): ");
+        System.out.print("CHOOSE LEVEL (1-3):");
+        System.out.println("BACK TO MENU = 4");
 
         //check if its an integer(entier)
         short level;
-            //as long as its not a valid integer then the question still ask
-            while (!scanner.hasNextInt()) {
-            scanner.next(); //recover the invalid character
-            System.out.print("CHOOSE LEVEL (1-3): "); //ask question for lvl
-            }
-            //read the lvl choose by the user
-            level = scanner.nextShort();
 
-                while (level < 1 || level > 3) {
-                System.out.println("between 1 and 3 happy idiots.");
-                level = scanner.nextShort();
-                }
+        level = scanner.nextShort();
 
         //display the selected lvl
         switch (level) {
             case 1:
-                System.out.println("You selected EASY lvl.");
+                System.out.println("You selected EASY lvl. Launch ... ");
                 break;
             case 2:
-                System.out.println("You selected MEDIUM lvl.");
+                System.out.println("You selected MEDIUM lvl. Launch ... ");
                 break;
             case 3:
-                System.out.println("You selected HARD lvl.");
+                System.out.println("You selected HARD lvl. Launch ... ");
                 break;
-                }
+            case 4:
+                Menu();
+                System.out.println();
+                break;
+        }
 
-                //proceed with the game after level selection
-                System.out.println("Starting the game at " + (level == 1 ? "EASY" : level == 2 ? "MEDIUM" : "HARD") + " lvl.");
-                BackToMenu();
+            //read the lvl choose by the user
+                while (level < 1 || level > 4) {
+                    System.out.println("between 1 and 3 happy idiots.");
+                    level = scanner.nextShort();
+        }
+
+                //as long as its not a valid integer then the question still ask
+                while (!scanner.hasNextShort()) {
+                    //recover the invalid character
+                    scanner.next();
+                    //ask question for lvl
+                    System.out.print("CHOOSE LEVEL (1-3): ");
+                    }
     }
 
     // Method to display the rules
@@ -67,7 +116,6 @@ class Menuu {
     // Method to display the options
     public static void Options() {
         System.out.println("Options");
-        System.out.println("1. MODIFY LEVEL");
         System.out.println("2. BLACK MODE / WHITE MODE");
         BackToMenu();
     }
@@ -77,7 +125,7 @@ class Menuu {
         Scanner scanner = new Scanner(System.in);
         System.out.println("BACK TO MENU = ENTER");
         // Wait for user input
-        scanner.nextLine();
+        scanner.nextShort();
     }
 
     public static void main(String[] args) {
@@ -109,19 +157,19 @@ class Menuu {
             // Choice processing
             switch (choix) {
                 case 1:
-                    GAME();  // User chose to play, enter game and select level
+                    SECONDMENU();
                     break;
                 case 2:
-                    Rules();  // Display the rules
+                    Rules();
                     break;
                 case 3:
-                    Options();  // Display the options
+                    Options();
                     break;
                 case 4:
-                    System.out.println("SEE YOU SOON");  // Exit the application
+                    System.out.println("SEE YOU SOON");
                     break;
             }
-            // As long as the user hasn't quit, the menu won't close
+            //As long as the user hasn't quit, the menu won't close
         } while (choix != 4);
     }
 }
