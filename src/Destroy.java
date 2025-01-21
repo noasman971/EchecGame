@@ -20,8 +20,8 @@ public class Destroy {
                 System.out.println("y: ");
 
                 byte y = sc.nextByte();
-                coord[0] = x;
-                coord[1] = y;
+                coord[1] = x;
+                coord[0] = y;
                 Ican = true;
 
             } catch (Exception e) {
@@ -35,14 +35,14 @@ public class Destroy {
     }
 
     /**
-     * Place the Bomb to the coords
+     * Place the Bomb to the coords when it's possible
      * @param grid the grid of the game
      * @param coord the coordonate chose by the Player
      */
     public static void PlaceTheBomb(byte[][] grid, byte[] coord) {
         boolean canIPlace = false;
         while (!canIPlace) {
-            if(coord[0]<11 && coord[1]<11 && grid[coord[0]][coord[1]] == 0) {
+            if(coord[0]<10 && coord[1]<11 && coord[0] >= 0 && coord[1] >= 0 && grid[coord[0]][coord[1]] == 0) {
                 grid[coord[0]][coord[1]] = 6;
                 canIPlace = true;
             }

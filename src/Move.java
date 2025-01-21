@@ -20,6 +20,7 @@ public class Move {
         System.out.println("Choose the direction in which you want to move:");
         Scanner input = new Scanner(System.in);
         String enter_user = input.nextLine();
+        byte count = 0;
         for (int i = 0; i < alldir.length; i++) {
             if (alldir[i].dir.equals(enter_user)) {
                 player[0] += alldir[i].move_coordonne[0];
@@ -29,6 +30,9 @@ public class Move {
                     player[0] -= alldir[i].move_coordonne[0];
                     player[1] -= alldir[i].move_coordonne[1];
                     Grid.place_players(Grid.grid, player, (byte)0 );
+                    player[0] += alldir[i].move_coordonne[0];
+                    player[1] += alldir[i].move_coordonne[1];
+
                 }
                 else {
                     player[0] -= alldir[i].move_coordonne[0];
@@ -37,6 +41,13 @@ public class Move {
                     move_player(grid, player, num_player);
                 }
             }
+            if (!alldir[i].dir.equals(enter_user)) {
+                count++;
+            }
+            if (count == 4) {
+                move_player(grid, player, num_player);
+            }
+
         }
 
     }
