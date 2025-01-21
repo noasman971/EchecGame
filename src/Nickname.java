@@ -8,7 +8,7 @@ public class Nickname { // Create a class named Nickname
     static List<String> nicknames = new ArrayList<>(); // Create a static List of strings to store nicknames
 
     public static void main(String[] args) {
-        int numberOfPlayers = 4;
+        int numberOfPlayers = Grid.number_player;
 
         for (int i = 1; i <= numberOfPlayers; i++) { // Loop to ask for nicknames from each player
             askNickname(i); // Call the askNickname method to get the nickname for the current player
