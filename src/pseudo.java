@@ -1,5 +1,5 @@
-public class Main {
-    public static void main(String[] args) {
+public class pseudo {
+    public static void pseudo(String[] args) {
 
     }
 }
