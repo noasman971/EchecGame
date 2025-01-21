@@ -4,8 +4,10 @@ import java.util.*;
 
 public class Game {
     public static byte[][] grid = new byte[10][11];
-    byte number_player = 4;
+    public static byte number_player = 2;
+    byte numplayer;
     public static byte[] j1 = {3, 5}, j2 = {4, 5}, j3 = {5,5}, j4 = {6, 5};
+    public static byte[][] playerPositions = {j1, j2, j3, j4};
 
 
     public static void grid_fill (byte[][] grid, byte nb)
@@ -41,10 +43,9 @@ public class Game {
 
     public static void main (String[] args) {
         grid_fill(grid, (byte) 0);
-        place_players(grid, j1, (byte) 1);
-        place_players(grid, j2, (byte) 2);
-        place_players(grid, j3, (byte) 3);
-        place_players(grid, j4, (byte) 4);
+        for (byte i = 0; i < number_player; i++) {
+            place_players(grid, playerPositions[i], (byte)(i+1));
+        }
         see_grid(grid);
 
     }
