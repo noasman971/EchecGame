@@ -39,6 +39,8 @@ public class Game {
                     }
 
                 }
+                Save.AskToSave();
+
             }
 
         }
