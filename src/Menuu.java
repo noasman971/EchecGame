@@ -11,6 +11,45 @@ class Menuu {
         System.out.print("CHOOSE WHAT YOU WANT (1-4): ");
     }
 
+    public static void SCORE(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\n --* SCOREBOARD *-- ");
+        System.out.println("MAEL ET PAS MAELLE - 3255pts");
+        System.out.println("LOUIS LE GOAT - 3000pts ");
+        System.out.println("LE ROI DES NOEILLE - 2850pts ");
+        System.out.println("Noahrr - 2500pts ");
+        System.out.println("Retour au Lobby = 4");
+
+
+        short level;
+        level = scanner.nextShort();
+
+        switch (level) {
+            case 4:
+                System.out.println("Retour au Lobby ");
+                SECONDMENU();
+                break;
+        }
+
+        while (level < 4 || level >4) {
+            System.out.println("return to lobby with 4 ");
+            level = scanner.nextShort();
+        }
+
+        while (!scanner.hasNextInt()) {
+            System.out.println("Your stupid but chill ");
+            // Detects if the button is invalid
+            scanner.next();
+            // Display the menu again
+            SCORE();
+        }
+
+
+
+
+    }
+
     public static void  SECONDMENU(){
         Scanner scanner = new Scanner(System.in);
 
@@ -18,8 +57,9 @@ class Menuu {
         System.out.println("\n--- Lobby ---");
         System.out.println("1. LOAD GAME");
         System.out.println("2. CHOOSE LVL");
+        System.out.println("3. SCORE");
         System.out.print("CHOOSE WHAT YOU WANT (1-3):");
-        System.out.println("BACK TO MENU = 3");
+        System.out.println("BACK TO MENU = 4");
 
         //check if its an integer(entier)
         short level;
@@ -34,12 +74,15 @@ class Menuu {
                 Game();
                 break;
             case 3:
+                SCORE();
+                break;
+            case 4:
                 Menu();
                 break;
             }
 
                 while (level < 1 || level > 3) {
-            System.out.println("between 1 and 2 happy idiots.");
+            System.out.println();
             level = scanner.nextShort();
                 }
 
