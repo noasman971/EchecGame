@@ -55,9 +55,9 @@ public class Destroy {
 
 
     public static void main(String[] args) {
-        Game.main(args);
-        PlaceTheBomb(Game.grid, AskToDestroy());
-        Game.see_grid(Game.grid);
+        Grid.main(args);
+        PlaceTheBomb(Grid.grid, AskToDestroy());
+        Grid.see_grid(Grid.grid);
 
 
 

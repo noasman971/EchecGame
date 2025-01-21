@@ -7,7 +7,7 @@ public class No_Move {
         for (byte i = 0; i < Move.alldir.length; i++) {
             current_pos[0] += Move.alldir[i].move_coordonne[0];
             current_pos[1] += Move.alldir[i].move_coordonne[1];
-            if (Game.grid[current_pos[0]][current_pos[1]]!=0) {count++;}
+            if (Grid.grid[current_pos[0]][current_pos[1]]!=0) {count++;}
         }
         if(count==4) {return true;} else {return false;}
     }

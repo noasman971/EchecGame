@@ -25,10 +25,10 @@ public class Move {
                 player[0] += alldir[i].move_coordonne[0];
                 player[1] += alldir[i].move_coordonne[1];
                 if (grid[player[0]][player[1]] == 0) {
-                    Game.place_players(Game.grid, player, num_player );
+                    Grid.place_players(Grid.grid, player, num_player );
                     player[0] -= alldir[i].move_coordonne[0];
                     player[1] -= alldir[i].move_coordonne[1];
-                    Game.place_players(Game.grid, player, (byte)0 );
+                    Grid.place_players(Grid.grid, player, (byte)0 );
                 }
                 else {
                     player[0] -= alldir[i].move_coordonne[0];
@@ -41,8 +41,8 @@ public class Move {
 
     }
     public static void main(String[] args) {
-        Game.main(args);
-        move_player(Game.grid, Game.j1, (byte)1);
-        Game.see_grid(Game.grid);
+        Grid.main(args);
+        move_player(Grid.grid, Grid.j1, (byte)1);
+        Grid.see_grid(Grid.grid);
     }
 }

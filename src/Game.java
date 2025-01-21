@@ -1,53 +1,31 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.*;
-
 public class Game {
-
-    public static byte[][] grid = new byte[10][11];
-    public static byte number_player = 2;
-    byte numplayer;
-    public static byte[] j1 = {3, 5}, j2 = {4, 5}, j3 = {5,5}, j4 = {6, 5};
-    public static byte[][] playerPositions = {j1, j2, j3, j4};
-
-
-    public static void grid_fill (byte[][] grid, byte nb)
+    public static  void Setup ()
     {
-        for (byte i = 0; i < grid.length; i++) {
-            for (byte j = 0; j < grid[i].length; j++) {
-                grid[i][j] = nb;
-            }
+        byte[] eliminate_player = new byte [Grid.number_player-1];
+        Grid.grid_fill(Grid.grid, (byte) 0);
+        for (byte i = 0; i < Grid.number_player; i++) {
+            Grid.place_players(Grid.grid, Grid.playerPositions[i], (byte) (i + 1));
         }
+        while (Grid.number_player>1) {
 
-    }
+            for (byte i = 0; i < Grid.number_player; i++) {
+                Grid.see_grid(Grid.grid);
+                System.out.println("Au tour du joueur " + (i+1));
+                Move.move_player(Grid.grid, Grid.playerPositions[i], (byte) (i + 1));
+                Grid.see_grid(Grid.grid);
+                Destroy.PlaceTheBomb(Grid.grid, Destroy.AskToDestroy());
+                if (No_Move.detection(Grid.grid, Grid.playerPositions[i]))
+                {
+                    eliminate_player[i] = i;
+                    System.out.println(eliminate_player);
 
-
-    public static void see_grid(byte[][] grid){
-        for (byte i = 0; i < grid.length; i++) {
-            for (byte j = 0; j < grid[i].length; j++) {
-                System.out.print(grid[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static void place_players(byte[][] grid, byte[] pos, byte num_player ){
-        for (byte i = 0; i < grid.length; i++) {
-            for (byte j = 0; j < grid[i].length; j++) {
-                if (i == pos[0] && j == pos[1]){
-                    grid[i][j] = num_player;
                 }
             }
-        }
 
+        }
     }
-
-    public static void main (String[] args) {
-        grid_fill(grid, (byte) 0);
-        for (byte i = 0; i < number_player; i++) {
-            place_players(grid, playerPositions[i], (byte)(i+1));
-        }
-        see_grid(grid);
+    public static void main(String[] args) {
+        Setup();
 
     }
 
