@@ -7,7 +7,7 @@ public class Score {
         String myFil = "ScoreList.txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(myFil))) {
-            for (String element : myList) {
+            for (String element : myFil.split("\n")) {
                 writer.write(element);
                 writer.newLine();
             }

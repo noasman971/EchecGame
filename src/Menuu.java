@@ -171,6 +171,13 @@ class Menuu {
         scanner.nextShort();
     }
 
+    public static void EsterEgg() {
+        Scanner scanner = new Scanner(System.in);
+        String answer = scanner.nextLine();
+        if (answer.equals("Clément le meilleur PO")){
+            boolean esteregg = true;
+        };
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         short choix;
@@ -191,8 +198,11 @@ class Menuu {
             // Read user's choice
             choix = scanner.nextShort();
 
+            if (choix==58) {
+                EsterEgg();
+            }
             // Check if the choice is between 1 and 4
-            if (choix < 1 || choix > 4) {
+            else if (choix < 1 || choix > 4) {
                 System.out.println("Your stupid but chill, choose between 1 and 4.");
                 continue;
             }
