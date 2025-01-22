@@ -42,7 +42,7 @@ public class Game {
                     win= false;
                     player = Nickname.nicknames.get(i);
                     Score.main(null);
-                    eliminate_player[i] = (byte) (i+1);
+                    eliminate_player[i] = (byte) (i);
                     for (int j = 0; j < eliminate_player.length; j++) {
                         System.out.println(eliminate_player[j]);
                     }

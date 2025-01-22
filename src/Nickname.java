@@ -11,9 +11,9 @@ public class Nickname { // create a class named Nickname
         int numberOfPlayers = 4;//debug
         askNickname(1, numberOfPlayers); // start the recursive
         // display all the nicknames
-        System.out.println("The players' nicknames are:");
+        System.out.println("The players's nicknames are:");
         for (String nickname : nicknames) {
-            System.out.println(", " + nickname);
+            System.out.println(" " + nickname);
         }
     }
 
