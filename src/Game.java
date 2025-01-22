@@ -22,7 +22,7 @@ public class Game {
                 {
                     win= true;
                     player = Nickname.nicknames.get(i);
-
+                    Score.main(null);
                     System.out.println("Game finish the player " + player + " win");
 
                     end = false;
