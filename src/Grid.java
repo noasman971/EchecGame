@@ -3,7 +3,8 @@ public class Grid {
     public static int height = 11;
     public static int width = 10;
     public static String[][] grid = new String[height][width];
-    public static byte number_player = 4;
+    public static byte[] graduate = new byte[height];
+    public static byte number_player = 2;
     byte numplayer;
     public static byte[] j1 = {3, 5}, j2 = {4, 5}, j3 = {5,5}, j4 = {6, 5};
     public static byte[][] playerPositions = {j1, j2, j3, j4};
@@ -23,6 +24,7 @@ public class Grid {
     public static void grid_fill (String[][] grid, String nb)
     {
         for (byte i = 0; i < grid.length; i++) {
+            graduate[i] = i;
             for (byte j = 0; j < grid[i].length; j++) {
                 grid[i][j] = nb;
             }
@@ -36,6 +38,8 @@ public class Grid {
      */
     public static void see_grid(String[][] grid){
         for (byte i = 0; i < grid.length; i++) {
+            System.out.print(graduate[i] + "  ");
+
             for (byte j = 0; j < grid[i].length; j++) {
                 System.out.print(grid[i][j] + " ");
             }
