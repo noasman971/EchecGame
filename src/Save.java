@@ -1,3 +1,6 @@
+import javax.print.DocFlavor;
+import java.io.*;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Save {
@@ -24,10 +27,37 @@ public class Save {
         return save;
     }
 
+    /**
+     * Function to write into a file to save
+     */
+    public static void WriteToFile(String[][] grid){
+
+        try {
+            FileWriter fileWriter = new FileWriter("Save.txt", true);
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[i].length; j++) {
+                    fileWriter.write(grid[i][j]);
+                }
+            }
+            fileWriter.close();
+        }
+        catch (IOException e) {
+            System.out.println(e);
+            System.exit(1);
+        }
+
+    }
+
+    public static void ReadFromFile(){
+
+    }
+
+
+
 
 
     public static void main(String[] args) {
-        AskToSave();
+        //AskToSave();
 
     }
 }

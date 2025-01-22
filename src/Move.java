@@ -15,7 +15,7 @@ public class Move {
         new Direction("d", new byte[]{0,1}),
         new Direction("q", new byte[]{0,-1})
     };
-    public static void move_player(byte[][] grid, byte[] player, byte num_player)
+    public static void move_player(String[][] grid, byte[] player, String num_player)
     {
         System.out.println("Choose the direction in which you want to move:");
         Scanner input = new Scanner(System.in);
@@ -25,11 +25,11 @@ public class Move {
             if (alldir[i].dir.equals(enter_user)) {
                 player[0] += alldir[i].move_coordonne[0];
                 player[1] += alldir[i].move_coordonne[1];
-                if (grid[player[0]][player[1]] == 0) {
-                    Grid.place_players(Grid.grid, player, num_player );
+                if (grid[player[0]][player[1]] == "⬜") {
+                    Grid.place_players(Grid.grid, player, "" + num_player);
                     player[0] -= alldir[i].move_coordonne[0];
                     player[1] -= alldir[i].move_coordonne[1];
-                    Grid.place_players(Grid.grid, player, (byte)0 );
+                    Grid.place_players(Grid.grid, player, "⬜" );
                     player[0] += alldir[i].move_coordonne[0];
                     player[1] += alldir[i].move_coordonne[1];
 
@@ -53,7 +53,7 @@ public class Move {
     }
     public static void main(String[] args) {
         Grid.main(args);
-        move_player(Grid.grid, Grid.j1, (byte)1);
+        move_player(Grid.grid, Grid.j1, "");
         Grid.see_grid(Grid.grid);
     }
 }
