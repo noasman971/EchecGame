@@ -1,11 +1,14 @@
 public class Game {
 
+    public static String player;
+    public static Boolean win;
+
     /**
      * To play with the Game
      */
     public static  void Setup ()
     {
-        String finish_player;
+
         Nickname.main(null);
         boolean end = true;
         byte[] eliminate_player = new byte [Grid.number_player-1];
@@ -17,8 +20,11 @@ public class Game {
             for (byte i = 0; i < Grid.number_player; i++) {
                 if(eliminate_player.length == (Grid.number_player-1)  && eliminate_player[0] != (byte)0)
                 {
-                    finish_player = Nickname.nicknames.get(i);
-                    System.out.println("Game finish the player " + i + " win");
+                    win= true;
+                    player = Nickname.nicknames.get(i);
+
+                    System.out.println("Game finish the player " + player + " win");
+
                     end = false;
                     break;
                 }
@@ -32,6 +38,8 @@ public class Game {
                 Destroy.PlaceTheBomb(Grid.grid, Destroy.AskToDestroy());
                 if (No_Move.detection(Grid.grid, Grid.playerPositions[i]))
                 {
+                    player = Nickname.nicknames.get(i);
+                    Score.main(null);
                     eliminate_player[i] = (byte) (i+1);
                     for (int j = 0; j < eliminate_player.length; j++) {
                         System.out.println(eliminate_player[j]);
