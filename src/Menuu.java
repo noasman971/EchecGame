@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 class Menuu {
     //Method to display the menu
+    public static boolean esteregg;
     public static void Menu() {
         System.out.println("\n=== GOAT'S MENU ===");
         System.out.println("1. PLAY");
@@ -175,8 +176,9 @@ class Menuu {
         Scanner scanner = new Scanner(System.in);
         String answer = scanner.nextLine();
         if (answer.equals("Clément le meilleur PO")){
-            boolean esteregg = true;
-        };
+            esteregg = true;
+            Game.Setup();
+        }
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -16,7 +16,7 @@ public class No_Move {
             current_pos[0] += Move.alldir[i].move_coordonne[0];
             current_pos[1] += Move.alldir[i].move_coordonne[1];
             //If the new position is outside the grid or different, increment the counter by 1.
-            if(current_pos[0]>=11 || current_pos[1]>=10 || current_pos[0] <= 0 || current_pos[1] <= 0){count++;}
+            if(current_pos[0]>=Grid.width || current_pos[1]>=Grid.height || current_pos[0] <= 0 || current_pos[1] <= 0){count++;}
             else if (grid[current_pos[0]][current_pos[1]]!=0) {count++;}
         }
         //If the player is blocked in all 4 directions, return true.

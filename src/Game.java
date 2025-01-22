@@ -6,10 +6,17 @@ public class Game {
     public static  void Setup ()
     {
         String finish_player;
+        byte fill_num = Byte.parseByte("⬛");
+        if (Menuu.esteregg)
+        {
+            fill_num= Byte.parseByte("⬛");
+        }
         Nickname.main(null);
         boolean end = true;
         byte[] eliminate_player = new byte [Grid.number_player-1];
-        Grid.grid_fill(Grid.grid, (byte) 0);
+        Grid.grid_change();
+        Grid.grid_fill(Grid.grid, fill_num);
+        EsterEgg.allwalker(1000);
         for (byte i = 0; i < Grid.number_player; i++) {
             Grid.place_players(Grid.grid, Grid.playerPositions[i], (byte) (i + 1));
         }
