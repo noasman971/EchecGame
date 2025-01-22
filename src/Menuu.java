@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class Menuu {
-    //Method to display the menu
+
     public static void Menu() {
         System.out.println("\n=== GOAT'S MENU ===");
         System.out.println("1. PLAY");
@@ -11,164 +11,55 @@ class Menuu {
         System.out.print("CHOOSE WHAT YOU WANT (1-4): ");
     }
 
-    public static void SCORE(){
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\n --* SCOREBOARD *-- ");
-        System.out.println("MAEL ET PAS MAELLE - 3255pts");
-        System.out.println("LOUIS LE GOAT - 3000pts ");
-        System.out.println("LE ROI DES NOEILLE - 2850pts ");
-        System.out.println("Noahrr - 2500pts ");
-        System.out.println("Retour au Lobby = 4");
-
-
-        short level;
-        level = scanner.nextShort();
-
-        switch (level) {
-            case 4:
-                System.out.println("Retour au Lobby ");
-                SECONDMENU();
-                break;
-        }
-
-        while (level < 4 || level >4) {
-            System.out.println("return to lobby with 4 ");
-            level = scanner.nextShort();
-        }
-
-        while (!scanner.hasNextInt()) {
-            System.out.println("Your stupid but chill ");
-            // Detects if the button is invalid
-            scanner.next();
-            // Display the menu again
-            SCORE();
-        }
-
-
-
-
-    }
-
-    public static void  SECONDMENU(){
-        Scanner scanner = new Scanner(System.in);
-
-
-        System.out.println("\n--- Lobby ---");
-        System.out.println("1. LOAD GAME");
-        System.out.println("2. CHOOSE LVL");
-        System.out.println("3. SCORE");
-        System.out.print("CHOOSE WHAT YOU WANT (1-3):");
-        System.out.println("BACK TO MENU = 4");
-
-        //check if its an integer(entier)
-        short level;
-
-        level = scanner.nextShort();
-
-            switch (level) {
-            case 1:
-                System.out.println("THE GAME Loading ...");
-                break;
-            case 2:
-                Game();
-                break;
-            case 3:
-                SCORE();
-                break;
-            case 4:
-                Menu();
-                break;
-            }
-
-                while (level < 1 || level > 3) {
-            System.out.println();
-            level = scanner.nextShort();
-                }
-
-
-
-                while (!scanner.hasNextInt()) {
-                    System.out.println("Your stupid but chill, choose between 1 and 3.");
-                    // Detects if the button is invalid
-                    scanner.next();
-                    // Display the menu again
-                    SECONDMENU();
-                    }
-    }
-
-    //Method to display the game and ask for the lvl
-    public static void Game() {
-        Scanner scanner = new Scanner(System.in);
-
-
-        //ask for lvl at user
-        System.out.println("\n--- SELECT LVL --- ");
-        System.out.println("1. Easy");
-        System.out.println("2. Medium");
-        System.out.println("3. Hard");
-        System.out.print("CHOOSE LEVEL (1-3):");
-        System.out.println("BACK TO MENU = 4");
-
-        //check if its an integer(entier)
-        short level;
-
-        level = scanner.nextShort();
-
-        //display the selected lvl
-        switch (level) {
-            case 1:
-                System.out.println("You selected EASY lvl. Launch ... ");
-                break;
-            case 2:
-                System.out.println("You selected MEDIUM lvl. Launch ... ");
-                break;
-            case 3:
-                System.out.println("You selected HARD lvl. Launch ... ");
-                break;
-            case 4:
-                Menu();
-                System.out.println();
-                break;
-        }
-
-            //read the lvl choose by the user
-                while (level < 1 || level > 4) {
-                    System.out.println("between 1 and 3 happy idiots.");
-                    level = scanner.nextShort();
-        }
-
-                //as long as its not a valid integer then the question still ask
-                while (!scanner.hasNextShort()) {
-                    //recover the invalid character
-                    scanner.next();
-                    //ask question for lvl
-                    System.out.print("CHOOSE LEVEL (1-3): ");
-                    }
-    }
-
-    // Method to display the rules
     public static void Rules() {
+        Scanner scanner = new Scanner(System.in);
+
+
         System.out.println("RULES:");
         System.out.println("1. A player cannot occupy a destroyed square or a square already occupied.");
         System.out.println("2. A player cannot destroy an occupied square.");
         System.out.println("3. A player blocked during a turn is declared the loser.");
-        BackToMenu();
+        System.out.println("Back to menu with 4.");
+
+        short level;
+        level = scanner.nextShort();
+
+        switch (level) {
+            case 4:
+                Menu();
+                break;
+        }
+        while (!scanner.hasNextShort()) {
+            System.out.println("Your stupid but chill, return to lobby with enter");
+            // Detects if the button is invalid
+            scanner.next();
+            // Display the menu again
+            Rules();
+
+        }
     }
 
-    // Method to display the options
+
     public static void Options() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Options");
         System.out.println("2. BLACK MODE / WHITE MODE");
-        BackToMenu();
-    }
+        System.out.println("Back to menu with 4.");
 
-    // When the user presses enter they return to the menu
-    public static void BackToMenu() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("BACK TO MENU = ENTER");
-        // Wait for user input
-        scanner.nextShort();
+        while (!scanner.hasNextShort()) {
+            System.out.println("Your stupid but chill, return to lobby with enter");
+            // Detects if the button is invalid
+            scanner.next();
+            // Display the menu again
+            Rules();
+             }
+                switch (scanner.nextShort()) {
+                    case 4:
+                    Menu();
+                    break;
+                }
     }
 
     public static void main(String[] args) {
@@ -179,13 +70,11 @@ class Menuu {
             // Menu display
             Menu();
 
-            // Validate the user's input to make sure it's a valid number
+            //validate the user input to make sure its a valid number
             while (!scanner.hasNextInt()) {
                 System.out.println("Your stupid but chill, choose between 1 and 4.");
                 // Detects if the button is invalid
-                scanner.next();
-                // Display the menu again
-                Menu();
+                scanner.nextLine();
             }
 
             // Read user's choice
@@ -200,7 +89,7 @@ class Menuu {
             // Choice processing
             switch (choix) {
                 case 1:
-                    SECONDMENU();
+                    SecondeMenu.SECONDMENU();
                     break;
                 case 2:
                     Rules();
