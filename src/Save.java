@@ -39,6 +39,7 @@ public class Save {
                     fileWriter.write(grid[i][j]);
                 }
             }
+            fileWriter.write("\n");
             fileWriter.close();
         }
         catch (IOException e) {
