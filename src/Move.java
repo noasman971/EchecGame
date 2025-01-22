@@ -25,7 +25,7 @@ public class Move {
             if (alldir[i].dir.equals(enter_user)) {
                 player[0] += alldir[i].move_coordonne[0];
                 player[1] += alldir[i].move_coordonne[1];
-                if (grid[player[0]][player[1]] == "⬜") {
+                if (grid[player[0]][player[1]].equals("⬜")) {
                     Grid.place_players(Grid.grid, player, "" + num_player);
                     player[0] -= alldir[i].move_coordonne[0];
                     player[1] -= alldir[i].move_coordonne[1];

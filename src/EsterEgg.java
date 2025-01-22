@@ -31,8 +31,8 @@ public class EsterEgg {
         }
         for (int i = 0; i < allwalker.length; i++) {
             for (int j = 0; j < allwalker[i].length; j++) {
-                Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = Byte.parseByte("⬜");
-                System.out.println(allwalker[i][j][0] + " " + allwalker[i][j][1]);
+//                Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = Byte.parseByte("⬜");
+//                System.out.println(allwalker[i][j][0] + " " + allwalker[i][j][1]);
             }
         }
 

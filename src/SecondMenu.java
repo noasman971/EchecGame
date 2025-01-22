@@ -31,7 +31,7 @@ class SecondeMenu{
                 GameMenu.Game();
                 break;
             case 3:
-                Score.SCORE();
+//                Score.SCORE();
                 break;
             case 4:
                 Menuu.Menu();

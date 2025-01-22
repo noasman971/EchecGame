@@ -1,11 +1,20 @@
 public class Grid {
 
-    public static String[][] grid = new String[10][11];
+    public static int height = 11;
+    public static int width = 10;
+    public static String[][] grid = new String[height][width];
     public static byte number_player = 2;
     byte numplayer;
     public static byte[] j1 = {3, 5}, j2 = {4, 5}, j3 = {5,5}, j4 = {6, 5};
     public static byte[][] playerPositions = {j1, j2, j3, j4};
+    public static void grid_change() {
+        if (Menuu.esteregg) {
+            height = 25;
+            width = 50;
+        }
 
+        grid = new String[height][width];
+    }
     /**
      * Fill the grid with nb
      * @param grid the grid of the game

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class Menuu {
-
+    public static boolean esteregg = true;
     public static void Menu() {
         System.out.println("\n=== GOAT'S MENU ===");
         System.out.println("1. PLAY");
