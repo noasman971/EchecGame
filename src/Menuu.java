@@ -176,5 +176,3 @@ class Menuu {
         } while (choix != 4);
     }
 }
-
-

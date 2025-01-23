@@ -1,79 +1,121 @@
-/*import java.util.Scanner;
-
-public class ScoreTable {
-
-    public static void SCORE() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\n --* SCOREBOARD *-- ");
-        System.out.println("Retour au Lobby = 4");
-
-        while(!scanner.hasNextShort()) {
-            System.out.println("Your stupid but chill, return to lobby with 4");
-            scanner.next();
-            SCORE();
-        }
-
-        short level = scanner.nextShort();
-        switch (level) {
-            case 4:
-                System.out.println("Retour au Lobby ");
-                SecondeMenu.SECONDMENU();
-        }
-
-        while(level < 4 || level > 4) {
-            System.out.println("return to lobby with 4 ");
-        }
-
-        while(!scanner.hasNextShort()) {
-            System.out.println("Your stupid but chill ");
-            scanner.next();
-            SCORE();
-        }
-
-    }
-}*/
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class ScoreTable {
-    public static void main(String[] args) {
-        // Nom du fichier à lire (ici, "ScoreList.txt")
-        String fichier = "ScoreList.txt";
+    public static void main() {
 
-        // Création d'une liste pour stocker les scores et les pseudos
-        List<String[]> scores = new ArrayList<>();
+        String fil = "ScoreList.txt";// Name of file to read
+        List<String[]> scores = new ArrayList<>();// List scores and nicknames
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fichier))) {
-            // Lecture ligne par ligne du fichier
-            String ligne;
-            while ((ligne = br.readLine()) != null) {
-                // On divise chaque ligne en deux parties, séparées par un "="
-                String[] elements = ligne.split("=");
-                scores.add(elements);  // Ajout des éléments (pseudo, score) à la liste
+        try (BufferedReader read = new BufferedReader(new FileReader(fil))) {//
+            String line;
+            // Separation of score and nickname in a list
+            while ((line = read.readLine()) != null) {
+                String[] elements = line.split("=");
+                scores.add(elements);
             }
         } catch (IOException e) {
-            System.err.println("Erreur lors de la lecture du fichier : " + e.getMessage());
+            System.err.println("Error reading file : " + e.getMessage());
         }
 
+        showScores(scores); // Print the score
 
-        System.out.println("+-----------+-------+");
-        System.out.println("| Nickname  | Score |");
-        System.out.println("+-----------+-------+");
+        //Ask the user if they want to sort the scores
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("                                                      Do you want to sort the scores?");
+        System.out.println("                                                                Croissant = 1");
+        System.out.println("                                                               Decreasing = 2");
 
-        // Parcours de la liste des scores pour les afficher
+        int choixTri = scanner.nextInt();
+
+        // Apply quick sort based on user choice
+        if (choixTri == 1) {
+            quickSort(scores, 0, scores.size() - 1, true);  // Tri croissant
+        } else if (choixTri == 2) {
+            quickSort(scores, 0, scores.size() - 1, false);  // Tri décroissant
+        } else {
+            System.out.println("Invalid choice. No sorting done.");
+        }
+
+        // Redisplay the sorted array
+        showScores(scores);
+
+        char Exit;
+        do {
+            System.out.println("e for Exit");
+            Exit = scanner.next().charAt(0);
+
+            switch (Exit) {
+                case 'e':
+                    Menuu.Menu(); //
+                    break;
+            }
+        } while (Exit != 'e');
+    }
+
+    // Method to display scores
+    public static void showScores(List<String[]> scores) {
+        System.out.println("                                                           +-----------+-------+");
+        System.out.println("                                                           | Nickname  | Score |");
+        System.out.println("                                                           +-----------+-------+");
+
+        // Browse the list of scores to display them
         for (String[] score : scores) {
-            // Ajustement de la largeur des colonnes pour un meilleur alignement
-            String Nickname = String.format("%-10s", score[0]);  // Le pseudo à une largeur de 10 caractères
-            String scoreValue = String.format("%-6s", score[1]);  // Le score à une largeur de 7 caractères
-            // Affichage formaté du pseudo et du score dans le tableau
-            System.out.println("| " + Nickname + "| " + scoreValue + "|");
+            String Nickname = String.format("%-10s", score[0]);
+            String scoreValue = String.format("%-6s", score[1]);
+            System.out.println("                                                           | " + Nickname + "| " + scoreValue + "|");
         }
 
-        // Affichage de la ligne de fin du tableau
-        System.out.println("+-----------+-------+");
+        System.out.println("                                                           +-----------+-------+");
+    }
+
+    // Main method to perform quicksort
+    public static void quickSort(List<String[]> scores, int low, int high, boolean croissant) {
+        // If the lower index is smaller than the upper index, we continue to divide the list
+        if (low < high) {
+            // We partition the list and obtain the pivot index
+            int i = partition(scores, low, high, croissant);
+
+            // Recursive sorting of the sublist to the left of the pivot
+            quickSort(scores, low, i - 1, croissant);
+
+            // Recursive sorting of the sublist to the right of the pivot
+            quickSort(scores, i + 1, high, croissant);
+        }
+    }
+
+    // Method that partitions the list around a pivot
+    private static int partition(List<String[]> scores, int low, int high, boolean croissant) {
+        // The pivot is the element at the end of the sublist
+        String[] pivot = scores.get(high);
+
+        // i represents the boundary between elements smaller than the pivot and those larger
+        int i = low - 1;
+
+        // We go through all the elements of the sublist
+        for (int j = low; j < high; j++) {
+            // Retrieving the scores of the elements to compare
+            int score1 = Integer.parseInt(scores.get(j)[1]);
+            int score2 = Integer.parseInt(pivot[1]);
+
+
+            // If we want an ascending order, we exchange if score1 < score2
+            // If we want a descending order, we exchange if score1 > score2
+            if ((croissant && score1 < score2) || (!croissant && score1 > score2)) {
+                // Increment of index i and exchange of elements
+                Collections.swap(scores, ++i, j);
+            }
+        }
+
+        // We finally place the pivot in its correct position
+        Collections.swap(scores, i + 1, high);
+
+        // Return the pivot position after partitioning
+        return i + 1;
     }
 }
-

@@ -1,11 +1,9 @@
-import java.util.Random;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game {
 
     public static String player;
-    public static Boolean win = false;
+    public static Boolean win;
     public static Boolean load = false;
     public static char[][] grid;
     /**
