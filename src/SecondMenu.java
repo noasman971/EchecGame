@@ -1,5 +1,9 @@
 import java.util.Scanner;
 class SecondeMenu{
+    /**
+     * Displays a menu where the user can choose to load a game, select a level, view the score table,
+     * or go back to the main menu. Ensures the input is valid before proceeding.
+     */
     public static void  SECONDMENU(){
         Scanner scanner = new Scanner(System.in);
         short level;

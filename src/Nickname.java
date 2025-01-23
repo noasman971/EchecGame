@@ -18,6 +18,13 @@ public class Nickname { // create a class named Nickname
         }
     }
 
+    /**
+     * Recursively asks each player to choose a unique nickname with a length between 2 and 10 characters.
+     * The method ensures that the nickname is valid (not too short, too long, or already taken).
+     *
+     * @param player The current player number.
+     * @param totalPlayers The total number of players.
+     */
     public static void askNickname(int player, int totalPlayers) { // recursive method
         if (player > totalPlayers) { // condition for exit the recursive
             return;

@@ -15,6 +15,14 @@ public class Move {
         new Direction("d", new byte[]{0,1}),
         new Direction("q", new byte[]{0,-1})
     };
+
+    /**
+     * Moves the player in the chosen direction if the move is valid.
+     *
+     * @param grid The game grid.
+     * @param player The player's current position.
+     * @param num_player The character representing the player.
+     */
     public static void move_player(char[][] grid, byte[] player, char num_player)
     {
         System.out.println("Choose the direction in which you want to move:");

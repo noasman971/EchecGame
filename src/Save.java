@@ -77,18 +77,11 @@ public class Save {
         try {
             List<String> lines = Files.readAllLines(Paths.get("Save.txt"));
 
-            // 2. Récupérer la premiere ligne
-            String content = lines.get(0);  // La premiere ligne du fichier
-
-            // 3. Supprimer les espaces et sauts de ligne inutiles
-            content = content.replaceAll("\\s+", "").trim();
-
-
+            String content = lines.get(0);
 
             int height = 11;
             int width = 10;
 
-            // 6. Remplir une grille 2D avec les chiffres en char
             char[][] grid = new char[height][width];
             int index = 0;
 
@@ -100,7 +93,6 @@ public class Save {
                 }
             }
 
-            // 7. Afficher la grille dans la console
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
                     System.out.print(grid[i][j]);
@@ -111,7 +103,7 @@ public class Save {
             return grid;
 
         } catch (IOException e) {
-            System.out.println("❌ Erreur de lecture du fichier : " + e.getMessage());
+            System.out.println("❌ Read Error : " + e.getMessage());
         }
         return null;
     }
@@ -121,7 +113,7 @@ public class Save {
      * @return a list of player names.
      */
     public static List<String> PlayerPseudo() {
-        List<String> pseudo = new ArrayList<>(); // Tableau vide par défaut
+        List<String> pseudo = new ArrayList<>();
         try {
 
             var lines = Files.readAllLines(Paths.get("Save.txt"));
@@ -131,7 +123,7 @@ public class Save {
             pseudo = Arrays.asList(secondLine.split(","));
 
         } catch (IOException e) {
-            System.out.println("❌ Erreur de lecture du fichier : " + e.getMessage());
+            System.out.println("❌ Read Error : " + e.getMessage());
         }
         return pseudo;
     }
@@ -150,7 +142,6 @@ public class Save {
             byte[][] playerPositions = new byte[Grid.number_player][2];
 
             for (int i = 0; i < Grid.number_player; i++) {
-                // Chaque joueur a deux coordonnées (X, Y)
                 playerPositions[i][0] = Byte.parseByte(positions[i * 2]);   // X
                 playerPositions[i][1] = Byte.parseByte(positions[i * 2 + 1]); // Y
             }
@@ -158,9 +149,9 @@ public class Save {
             return playerPositions;
 
         } catch (IOException e) {
-            System.out.println("❌ Erreur de lecture du fichier : " + e.getMessage());
+            System.out.println("❌ Read Error : " + e.getMessage());
         } catch (NumberFormatException e) {
-            System.out.println("❌ Erreur de format dans les positions : " + e.getMessage());
+            System.out.println("❌ Position error format : " + e.getMessage());
         }
         return null;
     }
@@ -174,7 +165,7 @@ public class Save {
 
             Files.write(Paths.get("Save.txt"), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
-            System.out.println("❌ Erreur lors de l'effacement des données : " + e.getMessage());
+            System.out.println("❌ Error : " + e.getMessage());
         }
     }
 

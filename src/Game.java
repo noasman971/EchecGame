@@ -13,7 +13,11 @@ public class Game {
     public static byte[][] player_position;
 
     /**
-     * To play with the Game
+     * Sets up the game, either by loading a saved game or starting a new one.
+     * It handles player turns, checks for blocked players, manages eliminations,
+     * and checks for a winner. It also allows saving the game and using Easter eggs.
+     *
+     * @return void
      */
     public static void Setup() {
         char fill = '0';
@@ -34,6 +38,7 @@ public class Game {
 
 
         } else {
+            load = false;
             grid = Grid.grid;
             number_player = Grid.number_player;
             Nickname.main(null);
@@ -63,54 +68,55 @@ public class Game {
 
         while (end) {
             for (int i = 0; i < number_player; i++) {
-                // Passez au joueur suivant si le joueur est éliminé
+                // if player eliminate the next player play
                 if (!eliminate_player.contains(i)) {
-                    // Affichez la grille
+
                     Grid.see_grid(grid);
 
-                    // Vérifiez si le joueur est bloqué
+                    // Verify if the player is blocked
                     if (No_Move.detection(grid, player_position[i])) {
-                        System.out.println("Le joueur " + Nickname.nicknames.get(i) + " est bloqué !");
+                        System.out.println("The player " + Nickname.nicknames.get(i) + " is blocked !");
                         win = false;
                         player = Nickname.nicknames.get(i);
                         Score.main(null);
 
-                        // Ajoutez le joueur à la liste des éliminés
+                        // Add the player to the eliminate list
                         eliminate_player.add(i);
-
-                        // Vérifiez si un seul joueur reste en jeu
-                        if (eliminate_player.size() == number_player - 1) {
-                            win = true;
-                            player = Nickname.nicknames.get((i + 1) % number_player); // Trouvez le joueur gagnant
-                            Score.main(null);
-                            System.out.println("La partie est terminée ! Le joueur " + player + " gagne !");
-                            end = false;
-                            break;
-                        }
-                    } else {
-                        // Tour du joueur
-                        System.out.println("C'est votre tour " + Nickname.nicknames.get(i) + " " + liste_emoji[i]);
+                    }
+                    else {
+                        // Player turn
+                        System.out.println("It's your turn " + Nickname.nicknames.get(i) + " " + liste_emoji[i]);
                         String s = "" + (i + 1);
                         Move.move_player(grid, player_position[i], s.charAt(0));
 
-                        // Affichez la grille après le déplacement
+
                         Grid.see_grid(grid);
 
-                        // Placez une bombe
                         Destroy.PlaceTheBomb(grid, Destroy.AskToDestroy());
 
-                        // Vérifiez à nouveau si le joueur est bloqué après son mouvement
+                        // Verify again if the player is blocked
                         if (No_Move.detection(grid, player_position[i])) {
-                            System.out.println("Le joueur " + Nickname.nicknames.get(i) + " est maintenant bloqué !");
+                            System.out.println("The player " + Nickname.nicknames.get(i) + " is now blocked !");
                             win = false;
                             player = Nickname.nicknames.get(i);
                             Score.main(null);
 
-                            // Ajoutez le joueur à la liste des éliminés
+
                             eliminate_player.add(i);
                         }
 
                     }
+                    // Verify if there is just one player alive
+                    if (eliminate_player.size() == number_player - 1) {
+                        win = true;
+                        player = Nickname.nicknames.get((i + 1) % number_player); // Trouvez le joueur gagnant
+                        Score.main(null);
+                        System.out.println("Game finish ! the player " + player + " has win !");
+
+                        end = false;
+                        break;
+                    }
+
                 }
             }
             if (Menuu.esteregg) {

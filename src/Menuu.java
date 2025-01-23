@@ -2,6 +2,10 @@ import java.util.Scanner;
 
 class Menuu {
     public static boolean esteregg;
+
+    /**
+     * Displays the main menu with options to play, view rules, adjust options, or leave the game.
+     */
     public static void Menu() {
         System.out.println("\n\u001B[35m" +
                              " #######    ####   ##  ##   #######    ####            #####     ###    ##   ##  #######          ##   ##  ####### ##   ##  ##   ##\n" +
@@ -19,6 +23,9 @@ class Menuu {
         System.out.print(" \u001B[33m                                              CHOOSE WHAT YOU WANT (1-4): ");
     }
 
+    /**
+     * Displays the game rules and allows the user to go back to the main menu by pressing 4.
+     */
     public static void Rules() {
         Scanner scanner = new Scanner(System.in);
 
@@ -47,6 +54,9 @@ class Menuu {
         }
     }
 
+    /**
+     * Displays an esteregg.
+     */
     public static void esteregg2() {
         System.out.println(" mael a dit , : 'un noeille n'est pas un noeille, tel est la devise de notre Maison (mael le sombre roi des premier noeilles)' ");
         System.out.println("⡵⣹⢪⡳⣹⢪⡪⡸⡨⡪⢢⠣⡪⡢⡣⡣⡫⡲⡹⡸⡸⠨⡂⠕⡈⡂⢅⢂⠣⠡⡑⢍⠪⢮⠺⡜⡮⡺⡸⡜⡎\n" +
@@ -86,6 +96,9 @@ class Menuu {
                 "");
     }
 
+    /**
+     * Displays the options menu and handles user input.
+     */
     public static void Options() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(" \u001B[31m                                                   2 - Est ce toi l'elu alors clique !!!!");
@@ -128,6 +141,9 @@ class Menuu {
 
     }
 
+    /**
+     * Triggers the Easter egg sequence if the user inputs the correct phrase.
+     */
     public static void EsterEgg() {
         Scanner scanner = new Scanner(System.in);
         String answer = scanner.nextLine();

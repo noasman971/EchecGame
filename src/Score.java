@@ -5,47 +5,48 @@ import java.util.Map;
 public class Score {
 
     public static void main(String[] args) {
-        String nickname = Game.player; // récupération du joueur
-        int plus = 5; // score victoire
-        int moin = -2; // score défaite
-        String Fil = "ScoreList.txt"; // fichier
+        String nickname = Game.player; // Get the player's nickname
+        int plus = 5; // win score
+        int moin = -2; // loss score
+        String Fil = "ScoreList.txt"; // file name
 
-        Map<String, Integer> AddScore = new HashMap<>(); // stocker les associations en mémoire
+        Map<String, Integer> AddScore = new HashMap<>(); // Store associations in memory
 
-        // Lecture du fichier existant (si existe) pour remplir le Map
-        try (BufferedReader read = new BufferedReader(new FileReader(Fil))) { // système de lecture du fichier
+        // Read the existing file (if it exists) to fill the map
+        try (BufferedReader read = new BufferedReader(new FileReader(Fil))) { // File reading system
             String line;
-            while ((line = read.readLine()) != null) { // Boucle tant qu'il y a des lignes à lire dans le fichier
-                String[] parts = line.split("="); // Séparation de la ligne en deux parties : le nom et le score
-                AddScore.put(parts[0], Integer.parseInt(parts[1])); // Vérification de la séparation
+            while ((line = read.readLine()) != null) { // Loop as long as there are lines to read in the file
+                String[] parts = line.split("="); // Split the line into two parts: name and score
+                AddScore.put(parts[0], Integer.parseInt(parts[1])); // Check the split and add to the map
             }
         } catch (IOException e) {
-            System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage()); // message d'erreur pour la lecture du fichier
+            System.out.println("Error reading the file: " + e.getMessage()); // Error message for file reading
         }
 
-        // Vérification si le nom existe déjà et mise à jour si nécessaire
+        // Check if the name already exists and update if necessary
         if (AddScore.containsKey(nickname)) {
             if (Game.win) {
-                AddScore.put(nickname, AddScore.get(nickname) + plus); // Mise à jour du score du joueur
+                AddScore.put(nickname, AddScore.get(nickname) + plus); // Update the player's score
             } else {
-                AddScore.put(nickname, AddScore.get(nickname) + moin); // Mise à jour du score du joueur
+                AddScore.put(nickname, AddScore.get(nickname) + moin); // Update the player's score
             }
         } else {
             if (Game.win) {
-                AddScore.put(nickname, plus); // Ajout du score du joueur
+                AddScore.put(nickname, plus); // Add the player's score
             } else {
-                AddScore.put(nickname, moin); // Ajout du score du joueur
+                AddScore.put(nickname, moin); // Add the player's score
             }
         }
 
-        // Écriture des associations dans le fichier
-        try (BufferedWriter right = new BufferedWriter(new FileWriter(Fil))) { // système d'écriture du fichier
+        // Write the associations to the file
+        try (BufferedWriter right = new BufferedWriter(new FileWriter(Fil))) { // File writing system
             for (Map.Entry<String, Integer> entry : AddScore.entrySet()) {
-                right.write(entry.getKey() + "=" + entry.getValue()); // = entre le nickname et le score
-                right.newLine(); // écriture
+                right.write(entry.getKey() + "=" + entry.getValue()); // Write the nickname and score with '=' in between
+                right.newLine(); // New line after writing
             }
         } catch (IOException e) {
-            System.out.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage()); // message d'erreur pour l'écriture du fichier
+            System.out.println("Error writing to the file: " + e.getMessage()); // Error message for file writing
         }
     }
+
 }

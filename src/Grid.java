@@ -7,6 +7,12 @@ public class Grid {
     public static byte[] graduate_width = new byte[width];
     public static byte number_player = 4;
 
+
+    /**
+     * Changes the grid size and initializes player positions.
+     * If the Easter egg mode is enabled, it sets the grid to 25x25.
+     * Otherwise, it uses the default grid size and calculates player placements.
+     */
     public static void grid_change() {
         if (Menuu.esteregg) {
             height = 25;
