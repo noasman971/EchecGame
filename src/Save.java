@@ -42,7 +42,7 @@ public class Save {
     public static void WriteToFile(char[][] grid){
 
         try {
-            FileWriter fileWriter = new FileWriter("Save.txt", true);
+            FileWriter fileWriter = new FileWriter("Save.txt");
             for (int i = 0; i < grid.length; i++) {
                 for (int j = 0; j < grid[i].length; j++) {
                     fileWriter.write(grid[i][j]);
@@ -58,7 +58,7 @@ public class Save {
             }
             fileWriter.write("\n");
             for (int i = 0; i < Grid.playerPositions.length; i++) {
-                fileWriter.write(Grid.playerPositions[i][0] + " " + Grid.playerPositions[i][1] + " "); // X Y
+                fileWriter.write(Grid.playerPositions[i][0] + " " + Grid.playerPositions[i][1] + " "); //  Y X
             }
             fileWriter.close();
         }
@@ -93,13 +93,6 @@ public class Save {
                 }
             }
 
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    System.out.print(grid[i][j]);
-                }
-                System.out.println();
-            }
-
             return grid;
 
         } catch (IOException e) {
@@ -116,7 +109,7 @@ public class Save {
         List<String> pseudo = new ArrayList<>();
         try {
 
-            var lines = Files.readAllLines(Paths.get("Save.txt"));
+            List<String> lines = Files.readAllLines(Paths.get("Save.txt"));
 
             String secondLine = lines.get(1);
 
@@ -155,19 +148,5 @@ public class Save {
         }
         return null;
     }
-
-
-    /**
-     * Clears the save file.
-     */
-    public static void clearFile() {
-        try {
-
-            Files.write(Paths.get("Save.txt"), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            System.out.println("❌ Error : " + e.getMessage());
-        }
-    }
-
 
 }

@@ -23,6 +23,6 @@ public class Color {
             case '8':
                 return ANSI_WHITE_BACKGROUND + " \uD83D\uDD2B " + ANSI_RESET;
         }
-        return ANSI_BLACK + ANSI_BLACK + element + ANSI_RESET;
+        return element + ANSI_RESET;
     }
 }

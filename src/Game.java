@@ -128,7 +128,6 @@ public class Game {
 
             // Verify if the game should be save
             if (Save.AskToSave()) {
-                Save.clearFile();
                 Save.WriteToFile(grid);
                 return;
             }
