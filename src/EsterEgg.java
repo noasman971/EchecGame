@@ -38,7 +38,7 @@ public class EsterEgg {
             for (int j = 0; j < allwalker[i].length; j++) {
                 if (allwalker[i][j][0] >= 0 && allwalker[i][j][0] < Grid.height &&
                         allwalker[i][j][1] >= 0 && allwalker[i][j][1] < Grid.width) {
-                    Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = "⬜";
+                    Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = '⬜';
                     count_allwalker++;
                 }
             }
@@ -47,7 +47,7 @@ public class EsterEgg {
     }
 
     public static void storm (){
-        ArrayList<byte[]> destruction = new ArrayList<>();
+        ArrayList<byte[]> alldestruction = new ArrayList<>();
         for (int i = 0; i < allwalker.length; i++) {
             for (int j = 0; j < allwalker[i].length; j++) {
                 boolean destruction = false;
@@ -55,7 +55,7 @@ public class EsterEgg {
                     byte[] currentpos = {allwalker[i][j][0],allwalker[i][j][1]};
                     currentpos[0] += Move.alldir[k].move_coordonne[0];
                     currentpos[1] += Move.alldir[k].move_coordonne[1];
-                    if(Grid.grid[currentpos[0]][currentpos[1]].equals("⬛"))
+                    if(Grid.grid[currentpos[0]][currentpos[1]] == '⬛')
                     {
                         destruction = true;
                     }
