@@ -8,7 +8,7 @@ public class Nickname { // create a class named Nickname
     static List<String> nicknames = new ArrayList<>(); // create a static List to store nicknames
 
     public static void main(String[] args) {
-        int numberOfPlayers = 4;//debug
+        int numberOfPlayers = Grid.number_player;//debug
         askNickname(1, numberOfPlayers); // start the recursive
         // display all the nicknames
         System.out.println("The players's nicknames are:");

@@ -4,13 +4,15 @@ public class Game {
 
     public static String player;
     public static Boolean win = false;
-
+    public static Boolean load = false;
     /**
      * To play with the Game
      */
     public static  void Setup ()
     {
-
+        if (load){
+            System.out.println("You have loaded the game!");
+        }
         Nickname.main(null);
         boolean end = true;
         byte[] eliminate_player = new byte [Grid.number_player-1];
@@ -53,7 +55,7 @@ public class Game {
                     if (eliminate_player[j] == (i+1)) {i++;}
                 }
                 Grid.see_grid(Grid.grid);
-                System.out.println("Au tour de "+ Nickname.nicknames.get(i));
+                System.out.println("It's your turn "+ Nickname.nicknames.get(i) + " " + liste_emoji[i]);
                 Move.move_player(Grid.grid, Grid.playerPositions[i], ""+(liste_emoji[i]));
                 Grid.see_grid(Grid.grid);
                 Destroy.PlaceTheBomb(Grid.grid, Destroy.AskToDestroy());
@@ -69,11 +71,17 @@ public class Game {
                         System.out.println(eliminate_player[j]);
                     }
                 }
-                if (Save.AskToSave()){
-                    Save.WriteToFile(Grid.grid);
-                    return;
-                }
+
             }
+            if (Save.AskToSave()){
+
+                    Save.WriteToFile(Grid.grid);
+
+
+                return;
+            }
+
+
         }
     }
     public static void main(String[] args) {
