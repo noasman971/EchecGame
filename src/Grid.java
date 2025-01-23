@@ -3,9 +3,9 @@ public class Grid {
     public static byte height = 11;
     public static byte width = 10;
     public static String[][] grid = new String[height][width];
-    public static byte[] graduate = new byte[height];
-    public static byte number_player = 4;
-    byte numplayer;
+    public static byte[] graduate_height = new byte[height];
+    public static byte[] graduate_width = new byte[width];
+    public static byte number_player = 2;
 
     public static void grid_change() {
         if (Menuu.esteregg) {
@@ -14,7 +14,8 @@ public class Grid {
         }
 
         grid = new String[height][width];
-        graduate = new byte[height];
+        graduate_height = new byte[height];
+        graduate_width = new byte[width];
         byte placment_player = (byte) (height/2/2/2);
         j1 = new byte[]{(byte) (height / 2 - placment_player), (byte) (width / 2 -placment_player)};
         j2 = new byte[]{(byte) (height / 2 - placment_player), (byte) (width / 2 + placment_player)};
@@ -33,9 +34,10 @@ public class Grid {
     public static void grid_fill (String[][] grid, String nb)
     {
         for (byte i = 0; i < grid.length; i++) {
-            graduate[i] = i;
+            graduate_height[i] = i;
             for (byte j = 0; j < grid[i].length; j++) {
                 grid[i][j] = nb;
+                graduate_width[j] = j;
             }
         }
 
@@ -46,17 +48,24 @@ public class Grid {
      * @param grid the grid of the game
      */
     public static void see_grid(String[][] grid){
+        System.out.print("     ");
+        for (int i = 0; i < graduate_width.length; i++) {
+
+            System.out.print(graduate_width[i] + "   ");
+
+        }
+        System.out.println();
         for (byte i = 0; i < grid.length; i++) {
             if (i<10){
-                System.out.print(graduate[i] + "   ");
+                System.out.print(graduate_height[i] + "   ");
             }
             else {
-                System.out.print(graduate[i] + "  ");
+                System.out.print(graduate_height[i] + "  ");
             }
 
 
             for (byte j = 0; j < grid[i].length; j++) {
-                System.out.print(grid[i][j] + " ");
+                System.out.print(grid[i][j] + "  ");
             }
             System.out.println();
         }

@@ -42,7 +42,7 @@ public class Destroy {
     public static void PlaceTheBomb(String[][] grid, byte[] coord) {
         boolean canIPlace = false;
         while (!canIPlace) {
-            if(coord[0]<Grid.width && coord[1]<Grid.height && coord[0] >= 0 && coord[1] >= 0 && grid[coord[0]][coord[1]].equals("⬜")) {
+            if(coord[1]<Grid.width && coord[0]<Grid.height && coord[0] >= 0 && coord[1] >= 0 && grid[coord[0]][coord[1]].equals("⬜")) {
                 grid[coord[0]][coord[1]] ="\uD83D\uDCA5";
                 canIPlace = true;
             }
