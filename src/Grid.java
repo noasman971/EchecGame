@@ -14,10 +14,12 @@ public class Grid {
         }
 
         grid = new String[height][width];
-        j1 = new byte[]{(byte) (height / 2 - 2), (byte) (width / 2)};
-        j2 = new byte[]{(byte) (height / 2 - 1), (byte) (width / 2)};
-        j3 = new byte[]{(byte) (height / 2 + 1), (byte) (width / 2)};
-        j4 = new byte[]{(byte) (height / 2 + 2), (byte) (width / 2)};
+        graduate = new byte[height];
+        byte placment_player = (byte) (height/2/2/2);
+        j1 = new byte[]{(byte) (height / 2 - placment_player), (byte) (width / 2 -placment_player)};
+        j2 = new byte[]{(byte) (height / 2 - placment_player), (byte) (width / 2 + placment_player)};
+        j3 = new byte[]{(byte) (height / 2 + placment_player), (byte) (width / 2 + placment_player)};
+        j4 = new byte[]{(byte) (height / 2 + placment_player), (byte) (width / 2 - placment_player)};
         playerPositions = new byte[][]{j1, j2, j3, j4};
     }
     public static byte[] j1 = {(byte) (height/2-2), (byte)(width/2)}, j2 = {(byte) (height/2-1), (byte)(width/2)},
@@ -45,7 +47,13 @@ public class Grid {
      */
     public static void see_grid(String[][] grid){
         for (byte i = 0; i < grid.length; i++) {
-            System.out.print(graduate[i] + "  ");
+            if (i<10){
+                System.out.print(graduate[i] + "   ");
+            }
+            else {
+                System.out.print(graduate[i] + "  ");
+            }
+
 
             for (byte j = 0; j < grid[i].length; j++) {
                 System.out.print(grid[i][j] + " ");

@@ -35,13 +35,38 @@ public class EsterEgg {
 
     }
 
-    public static void place_random_player (){
-        Random random = new Random();
-        int index = random.nextInt(EsterEgg.count_allwalker);
-        byte[] place_player = new byte [2];
-        place_player[0] = EsterEgg.allwalker[index][index][0];
-        place_player[1] = EsterEgg.allwalker[index][index][1];
+    public static void storm (){
+        byte[][] alldestruction = {};
+        for (int i = 0; i < allwalker.length; i++) {
+            for (int j = 0; j < allwalker[i].length; j++) {
+                boolean destruction = false;
+                for (int k = 0; k < Move.alldir.length; k++) {
+                    byte[] currentpos = {allwalker[i][j][0],allwalker[i][j][1]};
+                    currentpos[0] += Move.alldir[k].move_coordonne[0];
+                    currentpos[1] += Move.alldir[k].move_coordonne[1];
+                    if(Grid.grid[currentpos[0]][currentpos[1]].equals("⬛"))
+                    {
+                        destruction = true;
+                    }
+                    if (destruction){
+                        currentpos[0] -= Move.alldir[k].move_coordonne[0];
+                        currentpos[1] -= Move.alldir[k].move_coordonne[1];
+                        // add la current a alldestruction
+                        break;
+                    }
+                }
+            }
+        }
     }
+
+//    public static void place_random_player (){
+//        Random random = new Random();
+//        int index = random.nextInt(allwalker.length);
+//        int test = allwalker[index].length;
+//        byte[] place_player = new byte [2];
+//        place_player[0] = EsterEgg.allwalker[index][test][0];
+//        place_player[1] = EsterEgg.allwalker[index][test][1];
+//    }
     public static void main(String[] args) {
 
         Game.Setup();

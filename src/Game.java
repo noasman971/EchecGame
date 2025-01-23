@@ -23,7 +23,7 @@ public class Game {
         Grid.grid_fill(Grid.grid, fill);
         if(Menuu.esteregg){
             EsterEgg.allwalker(1000);
-            EsterEgg.place_random_player();
+//            EsterEgg.place_random_player();
         }
 
         String[] liste_emoji = {"\uD83D\uDC68\uD83C\uDFFB\u200D\uD83E\uDDB3", "\uD83D\uDC68\uD83C\uDFFF", "\uD83D\uDC69\uD83C\uDFFE", "\uD83D\uDC69\uD83C\uDFFB"};
@@ -72,6 +72,9 @@ public class Game {
                 if (Save.AskToSave()){
                     Save.WriteToFile(Grid.grid);
                     return;
+                }
+                if (Menuu.esteregg){
+                    EsterEgg.storm();
                 }
             }
         }
