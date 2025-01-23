@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
@@ -11,6 +13,16 @@ public class Game {
      */
     public static  void Setup ()
     {
+        char fill = '0';
+        if(Menuu.esteregg)
+        {
+            Grid.grid_change();
+            fill = '7';
+        }
+        if(Menuu.esteregg){
+            EsterEgg.allwalker(1000);
+//            EsterEgg.place_random_player();
+        }
 
         if (load){
             System.out.println("You have loaded the game!");
@@ -22,15 +34,12 @@ public class Game {
 
         Nickname.main(null);
         boolean end = true;
-        byte[] eliminate_player = new byte [Grid.number_player-1];
-        char fill = '0';
+        ArrayList<Integer> eliminate_player = new ArrayList<>();
+
+
         String[] liste_emoji = {"\uD83D\uDC68\uD83C\uDFFB\u200D\uD83E\uDDB3", "\uD83D\uDC68\uD83C\uDFFF", "\uD83D\uDC69\uD83C\uDFFE", "\uD83D\uDC69\uD83C\uDFFB"};
 
-        if(Menuu.esteregg)
-        {
-            Grid.grid_change();
-            fill = '⬛';
-        }
+
         if (!load){
             Grid.grid_fill(grid, fill);
             for (byte i = 0; i < Grid.number_player; i++) {
@@ -39,73 +48,72 @@ public class Game {
             }
 
         }
-        if(Menuu.esteregg){
-            EsterEgg.allwalker(1000);
-//            EsterEgg.place_random_player();
-        }
+
 
 
         while (end) {
-            for (byte i = 0; i < Grid.number_player; i++) {
-                byte count = 0;
+            while (end) {
+                for (int i = 0; i < Grid.number_player; i++) {
+                    // Passez au joueur suivant si le joueur est éliminé
+                    if (!eliminate_player.contains(i)) {
+                        // Affichez la grille
+                        Grid.see_grid(grid);
 
-                Grid.see_grid(grid);
-                if (No_Move.detection(grid, Grid.playerPositions[i])) {
-                    System.out.println(No_Move.count);
-                    win = false;
-                    player = Nickname.nicknames.get(i);
-//                  Score.main(null);
+                        // Vérifiez si le joueur est bloqué
+                        if (No_Move.detection(grid, Grid.playerPositions[i])) {
+                            System.out.println("Le joueur " + Nickname.nicknames.get(i) + " est bloqué !");
+                            win = false;
+                            player = Nickname.nicknames.get(i);
+                            Score.main(null);
 
-                    eliminate_player[i] = (byte) (i + 1);
-                    for (int j = 0; j < eliminate_player.length; j++) {
-                        System.out.println(eliminate_player[j]);
+                            // Ajoutez le joueur à la liste des éliminés
+                            eliminate_player.add(i);
+
+                            // Vérifiez si un seul joueur reste en jeu
+                            if (eliminate_player.size() == Grid.number_player - 1) {
+                                win = true;
+                                player = Nickname.nicknames.get((i + 1) % Grid.number_player); // Trouvez le joueur gagnant
+                                Score.main(null);
+                                System.out.println("La partie est terminée ! Le joueur " + player + " gagne !");
+                                end = false;
+                                break;
+                            }
+                        } else {
+                            // Tour du joueur
+                            System.out.println("C'est votre tour " + Nickname.nicknames.get(i) + " " + liste_emoji[i]);
+                            String s = "" + (i + 1);
+                            Move.move_player(grid, Grid.playerPositions[i], s.charAt(0));
+
+                            // Affichez la grille après le déplacement
+                            Grid.see_grid(grid);
+
+                            // Placez une bombe
+                            Destroy.PlaceTheBomb(grid, Destroy.AskToDestroy());
+
+                            // Vérifiez à nouveau si le joueur est bloqué après son mouvement
+                            if (No_Move.detection(grid, Grid.playerPositions[i])) {
+                                System.out.println("Le joueur " + Nickname.nicknames.get(i) + " est maintenant bloqué !");
+                                win = false;
+                                player = Nickname.nicknames.get(i);
+                                Score.main(null);
+
+                                // Ajoutez le joueur à la liste des éliminés
+                                eliminate_player.add(i);
+                            }
+                        }
                     }
                 }
-                for (int j = 0; j < eliminate_player.length; j++) {
-                    if (eliminate_player[j] != 0) {
-                        count++;
-                    }
+
+                // Vérifiez si la partie doit être sauvegardée
+                if (Save.AskToSave()) {
+                    Save.WriteToFile(grid);
+                    return; // Quittez la partie après la sauvegarde
                 }
-                if (count == Grid.number_player - 1 && eliminate_player[0] != (byte) 0)
-                // 3==4
-                {
-                    win = true;
-                    player = Nickname.nicknames.get(i + 1);
-//                  Score.main(null);
-                    System.out.println("Game finish the player " + player + " win");
 
-                    end = false;
-                    break;
+                // Gérer l'Easter Egg si activé
+                if (Menuu.esteregg) {
+                    EsterEgg.storm();
                 }
-                for (byte j = 0; j < eliminate_player.length; j++) {
-                    if (eliminate_player[j] == (i + 1)) {
-                        i++;
-                    }
-                }
-                System.out.println("It's your turn " + Nickname.nicknames.get(i) + " " + liste_emoji[i]);
-                String s = "" + (i + 1);
-                Move.move_player(grid, Grid.playerPositions[i], s.charAt(0));
-                Grid.see_grid(grid);
-                Destroy.PlaceTheBomb(grid, Destroy.AskToDestroy());
-                if (No_Move.detection(grid, Grid.playerPositions[i])) {
-                    win = false;
-                    player = Nickname.nicknames.get(i);
-                    Score.main(null);
-
-
-                }
-            }
-            if (Save.AskToSave()) {
-
-                Save.WriteToFile(grid);
-                return;
-
-
-
-
-            }
-            if(Menuu.esteregg) {
-                EsterEgg.storm();
             }
 
         }
