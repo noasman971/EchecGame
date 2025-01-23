@@ -47,32 +47,31 @@ public class Game {
 
         while (end) {
             for (byte i = 0; i < Grid.number_player; i++) {
-                byte count =0;
+                byte count = 0;
 
                 Grid.see_grid(grid);
-                if (No_Move.detection(grid, Grid.playerPositions[i]))
-                {
+                if (No_Move.detection(grid, Grid.playerPositions[i])) {
                     System.out.println(No_Move.count);
-                    win= false;
+                    win = false;
                     player = Nickname.nicknames.get(i);
 //                  Score.main(null);
 
 
-                    eliminate_player[i] = (byte) (i+1);
+                    eliminate_player[i] = (byte) (i + 1);
                     for (int j = 0; j < eliminate_player.length; j++) {
                         System.out.println(eliminate_player[j]);
                     }
                 }
                 for (int j = 0; j < eliminate_player.length; j++) {
-                    if (eliminate_player[j]!=0) {
+                    if (eliminate_player[j] != 0) {
                         count++;
                     }
                 }
-                if(count==Grid.number_player-1  && eliminate_player[0] != (byte)0)
+                if (count == Grid.number_player - 1 && eliminate_player[0] != (byte) 0)
                 // 3==4
                 {
-                    win= true;
-                    player = Nickname.nicknames.get(i+1);
+                    win = true;
+                    player = Nickname.nicknames.get(i + 1);
 //                  Score.main(null);
                     System.out.println("Game finish the player " + player + " win");
 
@@ -80,37 +79,39 @@ public class Game {
                     break;
                 }
                 for (byte j = 0; j < eliminate_player.length; j++) {
-                    if (eliminate_player[j] == (i+1)) {i++;}
+                    if (eliminate_player[j] == (i + 1)) {
+                        i++;
+                    }
                 }
                 Grid.see_grid(grid);
-                System.out.println("It's your turn "+ Nickname.nicknames.get(i) + " " + liste_emoji[i]);
-                String s = ""+(i+1);
+                System.out.println("It's your turn " + Nickname.nicknames.get(i) + " " + liste_emoji[i]);
+                String s = "" + (i + 1);
                 Move.move_player(grid, Grid.playerPositions[i], s.charAt(0));
                 Grid.see_grid(grid);
                 Destroy.PlaceTheBomb(grid, Destroy.AskToDestroy());
-                if (No_Move.detection(grid, Grid.playerPositions[i]))
-                {
-                    win= false;
+                if (No_Move.detection(grid, Grid.playerPositions[i])) {
+                    win = false;
                     player = Nickname.nicknames.get(i);
                     Score.main(null);
 
 
+                }
             }
-            if (Save.AskToSave()){
+            if (Save.AskToSave()) {
 
-                    Save.WriteToFile(grid);
-                    return;
-                }
-                if (Menuu.esteregg){
-                    EsterEgg.storm();
-                }
+                Save.WriteToFile(grid);
+                return;
+
 
 
 
             }
-
+            if(Menuu.esteregg) {
+                EsterEgg.storm();
+            }
 
         }
+    }
 
     public static void main(String[] args) {
         Setup();

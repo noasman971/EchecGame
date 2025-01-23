@@ -23,6 +23,7 @@ public class Grid {
         j4 = new byte[]{(byte) (height / 2 + placment_player), (byte) (width / 2 - placment_player)};
         playerPositions = new byte[][]{j1, j2, j3, j4};
     }
+
     public static byte[] j1 = {(byte) (height/2-2), (byte)(width/2)}, j2 = {(byte) (height/2-1), (byte)(width/2)},
             j3 = {(byte) (height/2+1), (byte)(width/2)}, j4 = {(byte) (height/2+2), (byte)(width/2)};
     public static byte[][] playerPositions = {j1, j2, j3, j4};
@@ -49,11 +50,11 @@ public class Grid {
      */
     public static void see_grid(char[][] grid){
         if (graduate_width.length==10){
-            System.out.println("     0   1   2   3   4   5    6   7   8   9");
+            System.out.println("     0 1 2 3 4 5 6 7 8 9");
         }
         else if (graduate_width.length==25) {
             System.out.println("     0   1   2   3   4   5    6   7   8   9   10   11  12  13  14  15   16   17   18   19   20   21   22   23   24");
-
+        }
         for (byte i = 0; i < grid.length; i++) {
             if (i<10){
                 System.out.print(graduate_height[i] + "   ");
