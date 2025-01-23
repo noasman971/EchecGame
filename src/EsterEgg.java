@@ -3,6 +3,7 @@ import java.util.Random;
 public class EsterEgg {
     public static byte[] middle = new byte[] {(byte) (Grid.height/2), (byte) (Grid.width/2)};
     public static byte[][][] allwalker;
+    public static int count_allwalker =0;
     public static  byte[][] walker (byte[] pos, byte lenghtwalker) {
         byte[][] walker = new byte[lenghtwalker][2];
         byte[] currentpos = middle.clone();
@@ -18,24 +19,28 @@ public class EsterEgg {
             walker[i][1] = dirrandom[1];
         }
 
-        // Pour vérifier, affichons les directions générées
-        for (int i = 0; i < walker.length; i++) {
-            System.out.println("Déplacement " + (i + 1) + ": [" + walker[i][0] + ", " + walker[i][1] + "]");
-        }
         return walker;
     }
     public static void allwalker (int iterations){
         allwalker = new byte[iterations][][];
         for (int i = 0; i < iterations; i++) {
-            allwalker[i]=walker(middle,(byte)10);
+            allwalker[i]=walker(middle,(byte)20);
         }
         for (int i = 0; i < allwalker.length; i++) {
             for (int j = 0; j < allwalker[i].length; j++) {
-//                Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = Byte.parseByte("⬜");
-//                System.out.println(allwalker[i][j][0] + " " + allwalker[i][j][1]);
+                Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = "⬜";
+                count_allwalker++;
             }
         }
 
+    }
+
+    public static void place_random_player (){
+        Random random = new Random();
+        int index = random.nextInt(EsterEgg.count_allwalker);
+        byte[] place_player = new byte [2];
+        place_player[0] = EsterEgg.allwalker[index][index][0];
+        place_player[1] = EsterEgg.allwalker[index][index][1];
     }
     public static void main(String[] args) {
 
