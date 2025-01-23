@@ -1,6 +1,6 @@
+import java.awt.*;
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game {
 
@@ -34,6 +34,7 @@ public class Game {
             player_position = Save.PlayerPosition() ;
 
 
+
         } else{
             grid = Grid.grid;
             number_player = Grid.number_player;
@@ -62,65 +63,65 @@ public class Game {
 
         while (end) {
             while (end) {
-                for (int i = 0; i < Grid.number_player; i++) {
-                    // Passez au joueur suivant si le joueur est éliminé
+                for (int i = 0; i < number_player; i++) {
+                    // if player eliminate the next player play
                     if (!eliminate_player.contains(i)) {
                         // Affichez la grille
                         Grid.see_grid(grid);
 
-                        // Vérifiez si le joueur est bloqué
-                        if (No_Move.detection(grid, Grid.playerPositions[i])) {
+                        // Verify if the player is blocked
+                        if (No_Move.detection(grid, player_position[i])) {
                             System.out.println("Le joueur " + Nickname.nicknames.get(i) + " est bloqué !");
                             win = false;
                             player = Nickname.nicknames.get(i);
                             Score.main(null);
 
-                            // Ajoutez le joueur à la liste des éliminés
+                            // Add the player to the eliminate list
                             eliminate_player.add(i);
 
-                            // Vérifiez si un seul joueur reste en jeu
-                            if (eliminate_player.size() == Grid.number_player - 1) {
+                            // Verify if there is just one player
+                            if (eliminate_player.size() == number_player - 1) {
                                 win = true;
-                                player = Nickname.nicknames.get((i + 1) % Grid.number_player); // Trouvez le joueur gagnant
+                                player = Nickname.nicknames.get((i + 1) % number_player); // Trouvez le joueur gagnant
                                 Score.main(null);
                                 System.out.println("La partie est terminée ! Le joueur " + player + " gagne !");
                                 end = false;
                                 break;
                             }
                         } else {
-                            // Tour du joueur
+                            // Turn of the player
                             System.out.println("C'est votre tour " + Nickname.nicknames.get(i) + " " + liste_emoji[i]);
                             String s = "" + (i + 1);
-                            Move.move_player(grid, Grid.playerPositions[i], s.charAt(0));
+                            Move.move_player(grid, player_position[i], s.charAt(0));
 
-                            // Affichez la grille après le déplacement
+                            // Display the grid after a movement
                             Grid.see_grid(grid);
 
-                            // Placez une bombe
+                            // Destruct a case
                             Destroy.PlaceTheBomb(grid, Destroy.AskToDestroy());
 
-                            // Vérifiez à nouveau si le joueur est bloqué après son mouvement
-                            if (No_Move.detection(grid, Grid.playerPositions[i])) {
+                            // Verify again if the player is blocked after a movement
+                            if (No_Move.detection(grid, player_position[i])) {
                                 System.out.println("Le joueur " + Nickname.nicknames.get(i) + " est maintenant bloqué !");
                                 win = false;
                                 player = Nickname.nicknames.get(i);
                                 Score.main(null);
 
-                                // Ajoutez le joueur à la liste des éliminés
+                                // Add the player to the eliminate list
                                 eliminate_player.add(i);
                             }
                         }
                     }
                 }
 
-                // Vérifiez si la partie doit être sauvegardée
+                // Verify if the game should be save
                 if (Save.AskToSave()) {
                     Save.clearFile();
                     Save.WriteToFile(grid);
-                    return; // Quittez la partie après la sauvegarde
+                    return;
                 }
 
-                // Gérer l'Easter Egg si activé
+                // Manage the easteregg
                 if (Menuu.esteregg) {
                     EsterEgg.storm();
                 }

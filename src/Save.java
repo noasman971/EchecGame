@@ -11,7 +11,10 @@ import java.nio.file.Paths;
 
 public class Save {
     /**
-     * Ask if we want to Save
+     * Prompts the user to decide whether to save or not.
+     * Returns true if the user selects 'y', false if 'n'.
+     *
+     * @return boolean: true for save, false for no save.
      */
     public static boolean AskToSave() {
         boolean Ican = false;
@@ -34,7 +37,7 @@ public class Save {
     }
 
     /**
-     * Function to write into a file to save
+     * Writes the current grid, player nicknames, and positions to a save file.
      */
     public static void WriteToFile(char[][] grid){
 
@@ -54,10 +57,8 @@ public class Save {
 
             }
             fileWriter.write("\n");
-            for (int i = 0; i < Grid.number_player; i++) {
-                for (int j = 0; j < Grid.number_player; j++) {
-                    fileWriter.write(Game.number_player);
-                }
+            for (int i = 0; i < Grid.playerPositions.length; i++) {
+                fileWriter.write(Grid.playerPositions[i][0] + " " + Grid.playerPositions[i][1] + " "); // X Y
             }
             fileWriter.close();
         }
@@ -69,8 +70,8 @@ public class Save {
     }
 
     /**
-     *  Function to recup the grid saved
-     * @return the grid save in the file
+     * Reads and returns the saved grid from the file.
+     * @return the saved grid as a 2D char array.
      */
     public static char[][] RecupGridFile() {
         try {
@@ -116,19 +117,17 @@ public class Save {
     }
 
     /**
-     * Function to recup pseudo of the player
-     * @return the pseudo of the players saved
+     * Gets the player names from the save file.
+     * @return a list of player names.
      */
     public static List<String> PlayerPseudo() {
         List<String> pseudo = new ArrayList<>(); // Tableau vide par défaut
         try {
-            // Lire toutes les lignes du fichier
+
             var lines = Files.readAllLines(Paths.get("Save.txt"));
 
-            // Récupérer la deuxième ligne
             String secondLine = lines.get(1);
 
-            // Diviser la ligne en pseudonymes en utilisant la virgule comme séparateur
             pseudo = Arrays.asList(secondLine.split(","));
 
         } catch (IOException e) {
@@ -138,52 +137,46 @@ public class Save {
     }
 
     /**
-     * Function to recup position of the player
-     * @return the position of the player
+     * Gets the positions of the players from the save file.
+     * @return a list of player positions (X, Y).
      */
     public static byte[][] PlayerPosition() {
-        byte[][] position = new byte[2][4]; // Tableau vide par défaut
         try {
-            // Lire toutes les lignes du fichier
             List<String> lines = Files.readAllLines(Paths.get("Save.txt"));
 
-            // Récupérer la troisième ligne
-            String thirdLine = lines.get(2);
+            String positionsLine = lines.get(2);
+            String[] positions = positionsLine.split(" ");
 
-            int index = 0;
-            for (int i = 0; i < 2; i++) {
-                for (int j = 0; j < 4; j++) {
-                    // Convertir chaque caractère en byte et l'ajouter au tableau
-                    position[i][j] = Byte.parseByte(String.valueOf(thirdLine.charAt(index)));
-                    System.out.println(position[i][j]);
-                    index++;
-                }
+            byte[][] playerPositions = new byte[Grid.number_player][2];
+
+            for (int i = 0; i < Grid.number_player; i++) {
+                // Chaque joueur a deux coordonnées (X, Y)
+                playerPositions[i][0] = Byte.parseByte(positions[i * 2]);   // X
+                playerPositions[i][1] = Byte.parseByte(positions[i * 2 + 1]); // Y
             }
+
+            return playerPositions;
 
         } catch (IOException e) {
             System.out.println("❌ Erreur de lecture du fichier : " + e.getMessage());
         } catch (NumberFormatException e) {
-            System.out.println("❌ Erreur de conversion des données : " + e.getMessage());
+            System.out.println("❌ Erreur de format dans les positions : " + e.getMessage());
         }
-        return position;
+        return null;
     }
 
 
     /**
-     * Function to clear the save file to have just one save
+     * Clears the save file.
      */
     public static void clearFile() {
         try {
-            // Écrire une chaîne vide pour effacer le fichier
+
             Files.write(Paths.get("Save.txt"), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             System.out.println("❌ Erreur lors de l'effacement des données : " + e.getMessage());
         }
     }
 
-    public static void main(String[] args) {
-        RecupGridFile();
-        PlayerPseudo();
 
-    }
 }
