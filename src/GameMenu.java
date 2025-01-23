@@ -5,12 +5,12 @@ public class GameMenu {
         Scanner scanner = new Scanner(System.in);
         short level;
         //ask for lvl at user
-        System.out.println("\n                                                             --- SELECT LVL --- ");
-        System.out.println("                                                                 1. 2 PLAYERS");
-        System.out.println("                                                                  2. 3 PLAYERS");
-        System.out.println("                                                                   3. 4 PLAYERS");
-        System.out.print("                                                              CHOOSE number player (1-3):");
-        System.out.println("                                                                 BACK TO MENU = 4");
+        System.out.println("\u001B[5m\n--- SELECT LVL --- ");
+        System.out.println("\u001B[36m 1. 2 PLAYERS");
+        System.out.println("\u001B[36m 2. 3 PLAYERS");
+        System.out.println("\u001B[36m 3. 4 PLAYERS");
+        System.out.print("\u001B[33m CHOOSE number player (1-3):");
+        System.out.println("     BACK TO MENU = 4");
 
         //check if its an integer(entier)
         while (!scanner.hasNextShort()) {

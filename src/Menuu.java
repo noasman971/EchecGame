@@ -3,13 +3,20 @@ import java.util.Scanner;
 class Menuu {
     public static boolean esteregg;
     public static void Menu() {
-        System.out.println("\n                                                          === ECHEC GAME MENU ===");
-        System.out.println("                                                                   1. PLAY");
-        System.out.println("                                                                   2. RULES");
-        System.out.println("                                                                   3. OPTIONS");
-        System.out.println("                                                                   4. LEAVE");
-
-        System.out.print("                                                              CHOOSE WHAT YOU WANT (1-4): ");
+        System.out.println("\n\u001B[35m" +
+                             " #######    ####   ##  ##   #######    ####            #####     ###    ##   ##  #######          ##   ##  ####### ##   ##  ##   ##\n" +
+                             " ##   #   ##  ##   ##  ##   ##   #   ##  ##           ##   ##   ## ##   ### ###  ##   #           ### ###  ##   #  ###  ##  ##   ##\n" +
+                             " ##      ##        ##  ##   ##      ##                ##       ##   ##  #######  ##               #######  ##      #### ##  ##   ##\n" +
+                             " ####    ##        ######   ####    ##                ## ####  ##   ##  ## # ##  ####             ## # ##  ####    #######  ##   ##\n" +
+                             " ##      ##        ##  ##   ##      ##                ##   ##  #######  ##   ##  ##               ##   ##  ##      ## ####  ##   ##\n" +
+                             " ##   #   ##  ##   ##  ##   ##   #   ##  ##           ##   ##  ##   ##  ##   ##  ##   #           ##   ##  ##   #  ##  ###  ##   ##\n" +
+                             " #######    ####   ##  ##   #######    ####            #####   ##   ##  ### ###  #######          ### ###  ####### ##   ##   #####\n" +
+                "\n");
+        System.out.println("\u001B[32m                                                     1. PLAY");
+        System.out.println("\u001B[36m                                                     2. RULES");
+        System.out.println("\u001B[34m                                                     3. OPTIONS");
+        System.out.println("\u001B[31m                                                     4. LEAVE");
+        System.out.print(" \u001B[33m                                              CHOOSE WHAT YOU WANT (1-4): ");
     }
 
     public static void Rules() {
@@ -17,10 +24,10 @@ class Menuu {
 
 
         System.out.println("                                                                    RULES:");
-        System.out.println("                                     1. A player cannot occupy a destroyed square or a square already occupied.");
-        System.out.println("                                     2. A player cannot destroy an occupied square.");
-        System.out.println("                                     3. A player blocked during a turn is declared the loser.");
-        System.out.println("                                                               Back to menu with 4.");
+        System.out.println(" \u001B[36m                                     1. A player cannot occupy a destroyed square or a square already occupied.");
+        System.out.println(" \u001B[36m                                     2. A player cannot destroy an occupied square.");
+        System.out.println(" \u001B[36m                                     3. A player blocked during a turn is declared the loser.");
+        System.out.println(" \u001B[33m                                                              Back to menu with 4.");
 
         short level;
         level = scanner.nextShort();
@@ -31,7 +38,7 @@ class Menuu {
                 break;
         }
         while (!scanner.hasNextShort()) {
-            System.out.println("                                     !!!!Your stupid but chill, return to lobby with enter");
+            System.out.println("\u001B[33m                                     !!!!Your stupid but chill, return to lobby with enter");
             // Detects if the button is invalid
             scanner.next();
             // Display the menu again
@@ -81,11 +88,11 @@ class Menuu {
 
     public static void Options() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("                                                   2 - Est ce toi l'elu alors clique !!!!");
+        System.out.println(" \u001B[31m                                                   2 - Est ce toi l'elu alors clique !!!!");
         short option;
 
         while (!scanner.hasNextShort()) {
-            System.out.println("tes pas futfut toi dit donc");
+            System.out.println("\u001B[33m tes pas futfut toi dit donc");
             // Detects if the button is invalid
             scanner.next();
             // Display the menu again
@@ -101,7 +108,7 @@ class Menuu {
             case 2:
                 Scanner sc = new Scanner(System.in);
 
-                System.out.println("Mot de passe");
+                System.out.println("\u001B[33mMot de passe");
                 String mdp = sc.nextLine();
                 if (mdp.equals("noeille n'est pas un noeille")) {
                     esteregg2();
@@ -111,6 +118,8 @@ class Menuu {
                 break;
             default:
                 System.out.println("Mauvais");
+
+
 
 
 
@@ -138,7 +147,7 @@ class Menuu {
 
             //validate the user input to make sure its a valid number
             while (!scanner.hasNextShort()) {
-                System.out.println("                                    !!!Your stupid but chill, choose between 1 and 4.");
+                System.out.println("\u001B[33m                                   !!!Your stupid but chill, choose between 1 and 4.");
                 // Detects if the button is invalid
                 scanner.nextLine();
             }
@@ -151,7 +160,7 @@ class Menuu {
             }
             // Check if the choice is between 1 and 4
             else if (choix < 1 || choix > 4) {
-                System.out.println("                                    !!!Your stupid but chill, choose between 1 and 4.");
+                System.out.println("\u001B[33m                                    !!!Your stupid but chill, choose between 1 and 4.");
                 continue;
             }
 
@@ -167,10 +176,12 @@ class Menuu {
                     Options();
                     break;
                 case 4:
-                    System.out.println("SEE YOU SOON");
+                    System.out.println("\u001B[33m SEE YOU SOON");
                     break;
             }
             //As long as the user hasn't quit, the menu won't close
         } while (choix != 4);
     }
 }
+
+
