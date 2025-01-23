@@ -3,11 +3,12 @@ import java.util.Scanner;
 class Menuu {
 
     public static void Menu() {
-        System.out.println("\n                                                             === GOAT'S MENU ===");
+        System.out.println("\n                                                          === ECHEC GAME MENU ===");
         System.out.println("                                                                   1. PLAY");
         System.out.println("                                                                   2. RULES");
         System.out.println("                                                                   3. OPTIONS");
         System.out.println("                                                                   4. LEAVE");
+
         System.out.print("                                                              CHOOSE WHAT YOU WANT (1-4): ");
     }
 
