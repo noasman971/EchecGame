@@ -38,7 +38,7 @@ public class EsterEgg {
             for (int j = 0; j < allwalker[i].length; j++) {
                 if (allwalker[i][j][0] >= 0 && allwalker[i][j][0] < Grid.height &&
                         allwalker[i][j][1] >= 0 && allwalker[i][j][1] < Grid.width) {
-                    Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = '⬜';
+                    Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = '0';
                     count_allwalker++;
                 }
             }
