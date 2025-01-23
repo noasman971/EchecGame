@@ -20,6 +20,8 @@ public class Color {
                 return ANSI_WHITE_BACKGROUND + " \uD83D\uDCA5 " + ANSI_RESET; //color of destruct
             case '7':
                 return ANSI_WHITE_BACKGROUND + " ⬛ " + ANSI_RESET; //couleur du player
+            case '8':
+                return ANSI_WHITE_BACKGROUND + " \uD83D\uDD2B " + ANSI_RESET;
         }
         return ANSI_BLACK + ANSI_BLACK + element + ANSI_RESET;
     }
