@@ -1,6 +1,0 @@
-blanc=5
-avion=-6
-lelectrici=-5
-ouioui=5
-nonon=20
-aaaaa!=-2
