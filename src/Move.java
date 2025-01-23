@@ -26,10 +26,10 @@ public class Move {
                 player[0] += alldir[i].move_coordonne[0];
                 player[1] += alldir[i].move_coordonne[1];
                 if (grid[player[0]][player[1]].equals("⬜")) {
-                    Grid.place_players(Grid.grid, player, "" + num_player);
+                    Grid.place_players(grid, player, "" + num_player);
                     player[0] -= alldir[i].move_coordonne[0];
                     player[1] -= alldir[i].move_coordonne[1];
-                    Grid.place_players(Grid.grid, player, "⬜" );
+                    Grid.place_players(grid, player, "⬜" );
                     player[0] += alldir[i].move_coordonne[0];
                     player[1] += alldir[i].move_coordonne[1];
 
