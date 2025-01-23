@@ -37,7 +37,7 @@ public class Save {
     /**
      * Function to write into a file to save
      */
-    public static void WriteToFile(String[][] grid){
+    public static void WriteToFile(char[][] grid){
 
         try {
             FileWriter fileWriter = new FileWriter("Save.txt", true);
@@ -67,6 +67,7 @@ public class Save {
      *  Function to recup the grid saved
      * @return the grid save in the file
      */
+    /*
     public static String[][] RecupGridFile() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("Save.txt"));
@@ -114,17 +115,10 @@ public class Save {
         return null;
     }
 
+
+     */
     // Méthode pour extraire correctement les emojis (sans les couper)
-    public static List<String> extractEmojis(String text) {
-        List<String> emojis = new ArrayList<>();
-        BreakIterator it = BreakIterator.getCharacterInstance(Locale.ROOT);
-        it.setText(text);
-        int start = it.first();
-        for (int end = it.next(); end != BreakIterator.DONE; start = end, end = it.next()) {
-            emojis.add(text.substring(start, end));
-        }
-        return emojis;
-    }
+
 
 
 
@@ -132,7 +126,7 @@ public class Save {
     public static void main(String[] args) {
         //AskToSave();
 
-        RecupGridFile();
+        // RecupGridFile();
 
 
     }

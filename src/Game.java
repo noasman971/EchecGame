@@ -5,7 +5,7 @@ public class Game {
     public static String player;
     public static Boolean win = false;
     public static Boolean load = false;
-    public static String[][] grid;
+    public static char[][] grid;
     /**
      * To play with the Game
      */
@@ -14,7 +14,7 @@ public class Game {
 
         if (load){
             System.out.println("You have loaded the game!");
-            grid = Save.RecupGridFile();
+            //grid = Save.RecupGridFile();
 
         } else{
             grid = Grid.grid;
@@ -23,18 +23,19 @@ public class Game {
         Nickname.main(null);
         boolean end = true;
         byte[] eliminate_player = new byte [Grid.number_player-1];
-        String fill = "⬜";
+        char fill = '0';
         String[] liste_emoji = {"\uD83D\uDC68\uD83C\uDFFB\u200D\uD83E\uDDB3", "\uD83D\uDC68\uD83C\uDFFF", "\uD83D\uDC69\uD83C\uDFFE", "\uD83D\uDC69\uD83C\uDFFB"};
 
         if(Menuu.esteregg)
         {
             Grid.grid_change();
-            fill = "⬛";
+            fill = '⬛';
         }
         if (!load){
             Grid.grid_fill(grid, fill);
             for (byte i = 0; i < Grid.number_player; i++) {
-                Grid.place_players(grid, Grid.playerPositions[i], ""+(liste_emoji[i]));
+                String s = ""+(i+1);
+                Grid.place_players(grid, Grid.playerPositions[i], s.charAt(0));
             }
 
         }
@@ -68,7 +69,8 @@ public class Game {
                 }
                 Grid.see_grid(grid);
                 System.out.println("It's your turn "+ Nickname.nicknames.get(i) + " " + liste_emoji[i]);
-                Move.move_player(grid, Grid.playerPositions[i], ""+(liste_emoji[i]));
+                String s = ""+(i+1);
+                Move.move_player(grid, Grid.playerPositions[i], s.charAt(0));
                 Grid.see_grid(grid);
                 Destroy.PlaceTheBomb(grid, Destroy.AskToDestroy());
                 if (No_Move.detection(grid, Grid.playerPositions[i]))

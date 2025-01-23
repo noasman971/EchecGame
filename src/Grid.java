@@ -2,7 +2,7 @@ public class Grid {
 
     public static byte height = 11;
     public static byte width = 10;
-    public static String[][] grid = new String[height][width];
+    public static char[][] grid = new char[height][width];
     public static byte[] graduate_height = new byte[height];
     public static byte[] graduate_width = new byte[width];
     public static byte number_player = 2;
@@ -13,7 +13,7 @@ public class Grid {
             width = 25;
         }
 
-        grid = new String[height][width];
+        grid = new char[height][width];
         graduate_height = new byte[height];
         graduate_width = new byte[width];
         byte placment_player = (byte) (height/2/2/2);
@@ -31,7 +31,7 @@ public class Grid {
      * @param grid the grid of the game
      * @param nb with what we fill
      */
-    public static void grid_fill (String[][] grid, String nb)
+    public static void grid_fill (char[][] grid, char nb)
     {
         for (byte i = 0; i < grid.length; i++) {
             graduate_height[i] = i;
@@ -47,11 +47,11 @@ public class Grid {
      * To see what are the element on the grid
      * @param grid the grid of the game
      */
-    public static void see_grid(String[][] grid){
-        System.out.print("     ");
+    public static void see_grid(char[][] grid){
+        System.out.print("    ");
         for (int i = 0; i < graduate_width.length; i++) {
 
-            System.out.print(graduate_width[i] + "   ");
+            System.out.print(graduate_width[i] + " ");
 
         }
         System.out.println();
@@ -65,7 +65,8 @@ public class Grid {
 
 
             for (byte j = 0; j < grid[i].length; j++) {
-                System.out.print(grid[i][j] + "  ");
+                System.out.print(Color.emoji(grid[i][j]));
+                //System.out.print(grid[i][j] + "   ");
             }
             System.out.println();
         }
@@ -77,11 +78,11 @@ public class Grid {
      * @param pos position x,y  in an array of the play
      * @param num_player number of the player
      */
-    public static void place_players(String[][] grid, byte[] pos, String num_player ){
+    public static void place_players(char[][] grid, byte[] pos, char num_player ){
         for (byte i = 0; i < grid.length; i++) {
             for (byte j = 0; j < grid[i].length; j++) {
                 if (i == pos[0] && j == pos[1]){
-                    grid[i][j] =  ""+num_player;
+                    grid[i][j] =  num_player;
                 }
             }
         }
