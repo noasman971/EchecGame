@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EsterEgg {
     public static byte[] middle = new byte[] {(byte) (Grid.height/2), (byte) (Grid.width/2)};
@@ -45,7 +47,7 @@ public class EsterEgg {
     }
 
     public static void storm (){
-        byte[][] alldestruction = {};
+        ArrayList<byte[]> destruction = new ArrayList<>();
         for (int i = 0; i < allwalker.length; i++) {
             for (int j = 0; j < allwalker[i].length; j++) {
                 boolean destruction = false;
