@@ -5,33 +5,45 @@ public class Game {
     public static String player;
     public static Boolean win = false;
     public static Boolean load = false;
+    public static String[][] grid;
     /**
      * To play with the Game
      */
     public static  void Setup ()
     {
+
         if (load){
             System.out.println("You have loaded the game!");
+            grid = Save.RecupGridFile();
+
+        } else{
+            grid = Grid.grid;
         }
+
         Nickname.main(null);
         boolean end = true;
         byte[] eliminate_player = new byte [Grid.number_player-1];
         String fill = "⬜";
+        String[] liste_emoji = {"\uD83D\uDC68\uD83C\uDFFB\u200D\uD83E\uDDB3", "\uD83D\uDC68\uD83C\uDFFF", "\uD83D\uDC69\uD83C\uDFFE", "\uD83D\uDC69\uD83C\uDFFB"};
+
         if(Menuu.esteregg)
         {
             Grid.grid_change();
             fill = "⬛";
         }
-        Grid.grid_fill(Grid.grid, fill);
+        if (!load){
+            Grid.grid_fill(grid, fill);
+            for (byte i = 0; i < Grid.number_player; i++) {
+                Grid.place_players(grid, Grid.playerPositions[i], ""+(liste_emoji[i]));
+            }
+
+        }
         if(Menuu.esteregg){
             EsterEgg.allwalker(1000);
 //            EsterEgg.place_random_player();
         }
 
-        String[] liste_emoji = {"\uD83D\uDC68\uD83C\uDFFB\u200D\uD83E\uDDB3", "\uD83D\uDC68\uD83C\uDFFF", "\uD83D\uDC69\uD83C\uDFFE", "\uD83D\uDC69\uD83C\uDFFB"};
-        for (byte i = 0; i < Grid.number_player; i++) {
-            Grid.place_players(Grid.grid, Grid.playerPositions[i], ""+(liste_emoji[i]));
-        }
+
         while (end) {
             for (byte i = 0; i < Grid.number_player; i++) {
                 byte count =0;
@@ -69,6 +81,7 @@ public class Game {
                 for (byte j = 0; j < eliminate_player.length; j++) {
                     if (eliminate_player[j] == (i+1)) {i++;}
                 }
+                Grid.see_grid(grid);
                 System.out.println("It's your turn "+ Nickname.nicknames.get(i) + " " + liste_emoji[i]);
                 Move.move_player(Grid.grid, Grid.playerPositions[i], ""+(liste_emoji[i]));
                 Grid.see_grid(Grid.grid);
@@ -78,7 +91,7 @@ public class Game {
             }
             if (Save.AskToSave()){
 
-                    Save.WriteToFile(Grid.grid);
+                    Save.WriteToFile(grid);
                     return;
                 }
                 if (Menuu.esteregg){
