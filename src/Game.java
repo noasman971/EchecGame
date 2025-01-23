@@ -17,7 +17,6 @@ public class Game {
      * It handles player turns, checks for blocked players, manages eliminations,
      * and checks for a winner. It also allows saving the game and using Easter eggs.
      *
-     * @return void
      */
     public static void Setup() {
         char fill = '0';
