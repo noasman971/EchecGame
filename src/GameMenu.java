@@ -5,12 +5,12 @@ public class GameMenu {
         Scanner scanner = new Scanner(System.in);
         short level;
         //ask for lvl at user
-        System.out.println("\n--- SELECT LVL --- ");
-        System.out.println("1. Easy");
-        System.out.println("2. Medium");
-        System.out.println("3. Hard");
-        System.out.print("CHOOSE LEVEL (1-3):");
-        System.out.println("BACK TO MENU = 4");
+        System.out.println("\n                                                             --- SELECT LVL --- ");
+        System.out.println("                                                                 1. 2 PLAYERS");
+        System.out.println("                                                                  2. 3 PLAYERS");
+        System.out.println("                                                                   3. 4 PLAYERS");
+        System.out.print("                                                              CHOOSE number player (1-3):");
+        System.out.println("                                                                 BACK TO MENU = 4");
 
         //check if its an integer(entier)
         while (!scanner.hasNextShort()) {
@@ -25,13 +25,19 @@ public class GameMenu {
         //display the selected lvl
         switch (level) {
             case 1:
-                System.out.println("You selected EASY lvl. Launch ... ");
+                System.out.println("You selected 2 PLAYERS lvl. Launch ... ");
+                Grid.number_player=2;
+                Game.Setup();
                 break;
             case 2:
-                System.out.println("You selected MEDIUM lvl. Launch ... ");
+                System.out.println("You selected 3 PLAYERS lvl. Launch ... ");
+                Grid.number_player=3;
+                Game.Setup();
                 break;
             case 3:
-                System.out.println("You selected HARD lvl. Launch ... ");
+                System.out.println("You selected 4  PLAYERS lvl. Launch ... ");
+                Grid.number_player=4;
+                Game.Setup();
                 break;
         }
 

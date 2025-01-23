@@ -4,12 +4,12 @@ class SecondeMenu{
         Scanner scanner = new Scanner(System.in);
         short level;
 
-        System.out.println("\n--- Lobby ---");
-        System.out.println("1. LOAD GAME");
-        System.out.println("2. CHOOSE LVL");
-        System.out.println("3. SCORE");
-        System.out.print("CHOOSE WHAT YOU WANT (1-3):");
-        System.out.println("BACK TO MENU = 4");
+        System.out.println("\n                                                               --- Lobby ---");
+        System.out.println("                                                                 1. LOAD GAME");
+        System.out.println("                                                                 2. CHOOSE LVL");
+        System.out.println("                                                                 3. SCORE");
+        System.out.print("                                                              CHOOSE WHAT YOU WANT (1-3):");
+        System.out.println("                                                                BACK TO MENU = 4");
 
         //check if its an integer
         while (!scanner.hasNextShort()) {
@@ -31,7 +31,7 @@ class SecondeMenu{
                 GameMenu.Game();
                 break;
             case 3:
-                Score.SCORE();
+                ScoreTable.SCORE();
                 break;
             case 4:
                 Menuu.Menu();
