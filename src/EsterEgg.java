@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EsterEgg {
     public static byte[] middle = new byte[] {(byte) (Grid.height/2), (byte) (Grid.width/2)};
@@ -13,6 +15,12 @@ public class EsterEgg {
             byte[] dirrandom = new byte[2];
             currentpos[0] += Move.alldir[index].move_coordonne[0];
             currentpos[1] += Move.alldir[index].move_coordonne[1];
+            if (currentpos[0] < 0 || currentpos[0] >= Grid.height ||
+                    currentpos[1] < 0 || currentpos[1] >= Grid.width) {
+                currentpos[0] -= Move.alldir[index].move_coordonne[0];
+                currentpos[1] -= Move.alldir[index].move_coordonne[1];
+                continue;
+            }
             dirrandom[0] = currentpos[0];
             dirrandom[1] = currentpos[1];
             walker[i][0] = dirrandom[0];
@@ -28,15 +36,18 @@ public class EsterEgg {
         }
         for (int i = 0; i < allwalker.length; i++) {
             for (int j = 0; j < allwalker[i].length; j++) {
-                Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = "⬜";
-                count_allwalker++;
+                if (allwalker[i][j][0] >= 0 && allwalker[i][j][0] < Grid.height &&
+                        allwalker[i][j][1] >= 0 && allwalker[i][j][1] < Grid.width) {
+                    Grid.grid[allwalker[i][j][0]][allwalker[i][j][1]] = '⬜';
+                    count_allwalker++;
+                }
             }
         }
 
     }
 
     public static void storm (){
-        byte[][] alldestruction = {};
+        ArrayList<byte[]> alldestruction = new ArrayList<>();
         for (int i = 0; i < allwalker.length; i++) {
             for (int j = 0; j < allwalker[i].length; j++) {
                 boolean destruction = false;
@@ -44,7 +55,7 @@ public class EsterEgg {
                     byte[] currentpos = {allwalker[i][j][0],allwalker[i][j][1]};
                     currentpos[0] += Move.alldir[k].move_coordonne[0];
                     currentpos[1] += Move.alldir[k].move_coordonne[1];
-                    if(Grid.grid[currentpos[0]][currentpos[1]].equals("⬛"))
+                    if(Grid.grid[currentpos[0]][currentpos[1]] == '⬛')
                     {
                         destruction = true;
                     }

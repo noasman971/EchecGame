@@ -26,6 +26,8 @@ class SecondeMenu{
         switch (level) {
             case 1:
                 System.out.println("THE GAME Loading ...");
+                Game.load = true;
+                Game.Setup();
                 break;
             case 2:
                 GameMenu.Game();
