@@ -17,8 +17,8 @@ public class Score {
         try (BufferedReader read = new BufferedReader(new FileReader(Fil))) { //système de lecture du fichier
             String line;
             while ((line = read.readLine()) != null) {// Boucle tant qu'il y a des lignes à lire dans le fichier
-                String[] parts = line.split(" ");// Séparation de la ligne en deux parties : le nom et le score
-                AddScore.put(parts[0], Integer.parseInt(parts[1]));// Vérification en vrai je comprend pas tros cette ligne
+                String[] parts = line.split("=");// Séparation de la ligne en deux parties : le nom et le score
+                AddScore.put(parts[0], Integer.parseInt(parts[1]));// Vérification de la séparation
             }
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage()); //message d'érreur pour la lecture du fichier

@@ -1,6 +1,6 @@
 blanc=5
 avion=-6
-lelectricien=-5
+lelectrici=-5
 ouioui=5
 nonon=20
 aaaaa!=-2

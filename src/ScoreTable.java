@@ -58,22 +58,22 @@ public class ScoreTable {
             System.err.println("Erreur lors de la lecture du fichier : " + e.getMessage());
         }
 
-        // Affichage du tableau avec des séparateurs pour rendre la sortie plus lisible
-        System.out.println("+------------------+-------+");
-        System.out.println("| Nickname         | Score |");
-        System.out.println("+------------------+-------+");
+
+        System.out.println("+-----------+-------+");
+        System.out.println("| Nickname  | Score |");
+        System.out.println("+-----------+-------+");
 
         // Parcours de la liste des scores pour les afficher
         for (String[] score : scores) {
             // Ajustement de la largeur des colonnes pour un meilleur alignement
             String Nickname = String.format("%-10s", score[0]);  // Le pseudo à une largeur de 10 caractères
-            String scoreValue = String.format("%-7s", score[1]);  // Le score à une largeur de 7 caractères
+            String scoreValue = String.format("%-6s", score[1]);  // Le score à une largeur de 7 caractères
             // Affichage formaté du pseudo et du score dans le tableau
             System.out.println("| " + Nickname + "| " + scoreValue + "|");
         }
 
         // Affichage de la ligne de fin du tableau
-        System.out.println("+------------------+-------+");
+        System.out.println("+-----------+-------+");
     }
 }
 
