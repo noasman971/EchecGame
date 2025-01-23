@@ -138,7 +138,7 @@ class Menuu {
             Menu();
 
             //validate the user input to make sure its a valid number
-            while (!scanner.hasNextInt()) {
+            while (!scanner.hasNextShort()) {
                 System.out.println("                                    !!!Your stupid but chill, choose between 1 and 4.");
                 // Detects if the button is invalid
                 scanner.nextLine();

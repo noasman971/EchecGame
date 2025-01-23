@@ -25,17 +25,17 @@ public class GameMenu {
         //display the selected lvl
         switch (level) {
             case 1:
-                System.out.println("You selected 2 PLAYERS lvl. Launch ... ");
+                System.out.println("You selected 2 PLAYERS . Launch ... ");
                 Grid.number_player=2;
                 Game.Setup();
                 break;
             case 2:
-                System.out.println("You selected 3 PLAYERS lvl. Launch ... ");
+                System.out.println("You selected 3 PLAYERS . Launch ... ");
                 Grid.number_player=3;
                 Game.Setup();
                 break;
             case 3:
-                System.out.println("You selected 4  PLAYERS lvl. Launch ... ");
+                System.out.println("You selected 4  PLAYERS . Launch ... ");
                 Grid.number_player=4;
                 Game.Setup();
                 break;

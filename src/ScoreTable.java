@@ -24,7 +24,7 @@ public class ScoreTable {
             System.out.println("return to lobby with 4 ");
         }
 
-        while(!scanner.hasNextInt()) {
+        while(!scanner.hasNextShort()) {
             System.out.println("Your stupid but chill ");
             scanner.next();
             SCORE();
