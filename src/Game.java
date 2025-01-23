@@ -10,8 +10,10 @@ public class Game {
      */
     public static  void Setup ()
     {
+
         if (load){
             System.out.println("You have loaded the game!");
+
         }
         Nickname.main(null);
         boolean end = true;
