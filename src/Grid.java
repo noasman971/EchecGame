@@ -48,13 +48,14 @@ public class Grid {
      * @param grid the grid of the game
      */
     public static void see_grid(String[][] grid){
-        System.out.print("     ");
-        for (int i = 0; i < graduate_width.length; i++) {
-
-            System.out.print(graduate_width[i] + "   ");
+        if (graduate_width.length==10){
+            System.out.println("     0   1   2   3   4   5    6   7   8   9");
+        }
+        else if (graduate_width.length==25) {
+            System.out.println("     0   1   2   3   4   5    6   7   8   9   10   11  12  13  14  15   16   17   18   19   20   21   22   23   24");
 
         }
-        System.out.println();
+
         for (byte i = 0; i < grid.length; i++) {
             if (i<10){
                 System.out.print(graduate_height[i] + "   ");

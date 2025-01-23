@@ -35,6 +35,21 @@ public class Game {
         while (end) {
             for (byte i = 0; i < Grid.number_player; i++) {
                 byte count =0;
+
+                Grid.see_grid(Grid.grid);
+                if (No_Move.detection(Grid.grid, Grid.playerPositions[i]))
+                {
+                    System.out.println(No_Move.count);
+                    win= false;
+                    player = Nickname.nicknames.get(i);
+//                  Score.main(null);
+
+
+                    eliminate_player[i] = (byte) (i+1);
+                    for (int j = 0; j < eliminate_player.length; j++) {
+                        System.out.println(eliminate_player[j]);
+                    }
+                }
                 for (int j = 0; j < eliminate_player.length; j++) {
                     if (eliminate_player[j]!=0) {
                         count++;
@@ -44,8 +59,8 @@ public class Game {
                 // 3==4
                 {
                     win= true;
-                    player = Nickname.nicknames.get(i);
-                    Score.main(null);
+                    player = Nickname.nicknames.get(i+1);
+//                  Score.main(null);
                     System.out.println("Game finish the player " + player + " win");
 
                     end = false;
@@ -54,23 +69,11 @@ public class Game {
                 for (byte j = 0; j < eliminate_player.length; j++) {
                     if (eliminate_player[j] == (i+1)) {i++;}
                 }
-                Grid.see_grid(Grid.grid);
                 System.out.println("It's your turn "+ Nickname.nicknames.get(i) + " " + liste_emoji[i]);
                 Move.move_player(Grid.grid, Grid.playerPositions[i], ""+(liste_emoji[i]));
                 Grid.see_grid(Grid.grid);
                 Destroy.PlaceTheBomb(Grid.grid, Destroy.AskToDestroy());
-                if (No_Move.detection(Grid.grid, Grid.playerPositions[i]))
-                {
-                    win= false;
-                    player = Nickname.nicknames.get(i);
-                    Score.main(null);
 
-
-                    eliminate_player[i] = (byte) (i+1);
-                    for (int j = 0; j < eliminate_player.length; j++) {
-                        System.out.println(eliminate_player[j]);
-                    }
-                }
 
             }
             if (Save.AskToSave()){
