@@ -1,6 +1,4 @@
-import javax.print.DocFlavor;
 import java.io.*;
-import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Save {
@@ -39,6 +37,7 @@ public class Save {
                     fileWriter.write(grid[i][j]);
                 }
             }
+            fileWriter.write("\n");
             fileWriter.close();
         }
         catch (IOException e) {
@@ -48,7 +47,23 @@ public class Save {
 
     }
 
-    public static void ReadFromFile(){
+    public static void RecupGridFile(){
+        try (FileReader fileReader = new FileReader("Save.txt");
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String line;
+            String[][] savegrid = new String[10][11];
+            line = bufferedReader.readLine();
+            for (int i = 0; i < line.length(); i++) {
+                for (int j = 0; j < line.length(); j++) {
+                    savegrid[i][j] = line.charAt(i) + "";
+                }
+            }
+            System.out.println(savegrid);
+
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+
 
     }
 
@@ -58,6 +73,7 @@ public class Save {
 
     public static void main(String[] args) {
         //AskToSave();
+        RecupGridFile();
 
     }
 }
