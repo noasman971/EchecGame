@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class Menuu {
-
+    public static boolean esteregg;
     public static void Menu() {
         System.out.println("\n                                                          === ECHEC GAME MENU ===");
         System.out.println("                                                                   1. PLAY");
@@ -124,8 +124,9 @@ class Menuu {
     public static void EsterEgg() {
         Scanner scanner = new Scanner(System.in);
         String answer = scanner.nextLine();
-        if (answer.equals("Clément le meilleur PO")) {
-            boolean esteregg = true;
+        if (answer.equals("Clément le meilleur PO")){
+            esteregg = true;
+            Game.Setup();
         }
     }
 

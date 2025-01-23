@@ -39,11 +39,11 @@ public class Destroy {
      * @param grid the grid of the game
      * @param coord the coordonate chose by the Player
      */
-    public static void PlaceTheBomb(byte[][] grid, byte[] coord) {
+    public static void PlaceTheBomb(String[][] grid, byte[] coord) {
         boolean canIPlace = false;
         while (!canIPlace) {
-            if(coord[0]<10 && coord[1]<11 && coord[0] >= 0 && coord[1] >= 0 && grid[coord[0]][coord[1]] == 0) {
-                grid[coord[0]][coord[1]] = 6;
+            if(coord[1]<Grid.width && coord[0]<Grid.height && coord[0] >= 0 && coord[1] >= 0 && grid[coord[0]][coord[1]].equals("⬜")) {
+                grid[coord[0]][coord[1]] ="\uD83D\uDCA5";
                 canIPlace = true;
             }
             else {
