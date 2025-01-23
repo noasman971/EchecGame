@@ -14,6 +14,8 @@ public class Game {
         if (load){
             System.out.println("You have loaded the game!");
 
+        } else{
+            String[][] grid = Grid.grid;
         }
         Nickname.main(null);
         boolean end = true;
