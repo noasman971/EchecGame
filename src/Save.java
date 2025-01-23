@@ -1,18 +1,20 @@
-
 import java.util.Scanner;
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Locale;
 
 
 public class Save {
     /**
-     * Ask if we want to Save
+     * Prompts the user to decide whether to save or not.
+     * Returns true if the user selects 'y', false if 'n'.
+     *
+     * @return boolean: true for save, false for no save.
      */
     public static boolean AskToSave() {
         boolean Ican = false;
@@ -35,7 +37,7 @@ public class Save {
     }
 
     /**
-     * Function to write into a file to save
+     * Writes the current grid, player nicknames, and positions to a save file.
      */
     public static void WriteToFile(char[][] grid){
 
@@ -54,6 +56,10 @@ public class Save {
                 }
 
             }
+            fileWriter.write("\n");
+            for (int i = 0; i < Grid.playerPositions.length; i++) {
+                fileWriter.write(Grid.playerPositions[i][0] + " " + Grid.playerPositions[i][1] + " "); // X Y
+            }
             fileWriter.close();
         }
         catch (IOException e) {
@@ -64,11 +70,10 @@ public class Save {
     }
 
     /**
-     *  Function to recup the grid saved
-     * @return the grid save in the file
+     * Reads and returns the saved grid from the file.
+     * @return the saved grid as a 2D char array.
      */
-    /*
-    public static String[][] RecupGridFile() {
+    public static char[][] RecupGridFile() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("Save.txt"));
 
@@ -78,56 +83,100 @@ public class Save {
             // 3. Supprimer les espaces et sauts de ligne inutiles
             content = content.replaceAll("\\s+", "").trim();
 
-            // 4. Extraire les emojis complets (sans découpe incorrecte)
-            List<String> emojis = extractEmojis(content);
 
-            // 5. Vérifier qu'on a exactement 110 emojis (11x10)
-            int rows = 11;
-            int cols = 10;
-            if (emojis.size() != rows * cols) {
-                System.out.println("❌ Erreur : Nombre d'emojis incorrect !");
-                System.out.println("🔍 Emojis détectés : " + emojis.size());
-                return null;
-            }
 
-            // 6. Remplir une grille 2D avec les emojis
-            String[][] grid = new String[rows][cols];
+            int height = 11;
+            int width = 10;
+
+            // 6. Remplir une grille 2D avec les chiffres en char
+            char[][] grid = new char[height][width];
             int index = 0;
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    grid[i][j] = emojis.get(index++);
+
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+
+                    grid[i][j] = content.charAt(index);
+                    index++;
                 }
             }
 
             // 7. Afficher la grille dans la console
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
                     System.out.print(grid[i][j]);
                 }
                 System.out.println();
             }
-            // pseudo
-            System.out.println(lines.get(1));
+
             return grid;
+
         } catch (IOException e) {
             System.out.println("❌ Erreur de lecture du fichier : " + e.getMessage());
         }
         return null;
     }
 
-
+    /**
+     * Gets the player names from the save file.
+     * @return a list of player names.
      */
-    // Méthode pour extraire correctement les emojis (sans les couper)
+    public static List<String> PlayerPseudo() {
+        List<String> pseudo = new ArrayList<>(); // Tableau vide par défaut
+        try {
 
+            var lines = Files.readAllLines(Paths.get("Save.txt"));
 
+            String secondLine = lines.get(1);
 
+            pseudo = Arrays.asList(secondLine.split(","));
 
-
-    public static void main(String[] args) {
-        //AskToSave();
-
-        // RecupGridFile();
-
-
+        } catch (IOException e) {
+            System.out.println("❌ Erreur de lecture du fichier : " + e.getMessage());
+        }
+        return pseudo;
     }
+
+    /**
+     * Gets the positions of the players from the save file.
+     * @return a list of player positions (X, Y).
+     */
+    public static byte[][] PlayerPosition() {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("Save.txt"));
+
+            String positionsLine = lines.get(2);
+            String[] positions = positionsLine.split(" ");
+
+            byte[][] playerPositions = new byte[Grid.number_player][2];
+
+            for (int i = 0; i < Grid.number_player; i++) {
+                // Chaque joueur a deux coordonnées (X, Y)
+                playerPositions[i][0] = Byte.parseByte(positions[i * 2]);   // X
+                playerPositions[i][1] = Byte.parseByte(positions[i * 2 + 1]); // Y
+            }
+
+            return playerPositions;
+
+        } catch (IOException e) {
+            System.out.println("❌ Erreur de lecture du fichier : " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Erreur de format dans les positions : " + e.getMessage());
+        }
+        return null;
+    }
+
+
+    /**
+     * Clears the save file.
+     */
+    public static void clearFile() {
+        try {
+
+            Files.write(Paths.get("Save.txt"), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("❌ Erreur lors de l'effacement des données : " + e.getMessage());
+        }
+    }
+
+
 }

@@ -5,9 +5,10 @@ import java.util.Scanner; // import the Scanner class
 public class Nickname { // create a class named Nickname
 
     static Scanner scanner = new Scanner(System.in); // create a static Scanner object
-    static List<String> nicknames = new ArrayList<>(); // create a static List to store nicknames
+    public static List<String> nicknames = new ArrayList<>(); // create a static List to store nicknames
 
     public static void main(String[] args) {
+        nicknames.clear();
         int numberOfPlayers = Grid.number_player;//debug
         askNickname(1, numberOfPlayers); // start the recursive
         // display all the nicknames

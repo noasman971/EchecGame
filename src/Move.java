@@ -52,7 +52,7 @@ public class Move {
 
     }
     public static void main(String[] args) {
-        Grid.main(args);
+//        Grid.main(args);
         //move_player(Grid.grid, Grid.j1, "");
         Grid.see_grid(Grid.grid);
     }

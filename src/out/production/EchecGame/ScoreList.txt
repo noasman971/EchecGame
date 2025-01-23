@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ffa=5
 sdq=5
 ad=5
@@ -12,3 +13,9 @@ aer=5
 qf=5
 blanc=5
 fa=5
+=======
+djdfjfdgj=5
+mael=5
+noah=5
+poi=5
+>>>>>>> 53b8692686f780e95f91df5595d26d95bb9e7674

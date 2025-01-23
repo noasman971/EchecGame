@@ -1,4 +1,7 @@
+import java.awt.*;
+import java.util.Random;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
@@ -6,6 +9,8 @@ public class Game {
     public static Boolean win = false;
     public static Boolean load = false;
     public static char[][] grid;
+    public static byte number_player;
+    public static byte[][] player_position;
 
     /**
      * To play with the Game
@@ -22,13 +27,20 @@ public class Game {
 
         if (load) {
             System.out.println("You have loaded the game!");
-            //grid = Save.RecupGridFile();
+            grid = Save.RecupGridFile();
+            number_player = (byte) Save.PlayerPseudo().size();
+            Nickname.nicknames = Save.PlayerPseudo();
+            player_position = Save.PlayerPosition();
+
 
         } else {
             grid = Grid.grid;
+            number_player = Grid.number_player;
+            Nickname.main(null);
+            player_position = Grid.playerPositions;
+
         }
 
-        Nickname.main(null);
         boolean end = true;
         ArrayList<Integer> eliminate_player = new ArrayList<>();
 
@@ -43,7 +55,7 @@ public class Game {
             }
             for (byte i = 0; i < Grid.number_player; i++) {
                 String s = "" + (i + 1);
-                Grid.place_players(grid, Grid.playerPositions[i], s.charAt(0));
+                Grid.place_players(grid, player_position[i], s.charAt(0));
             }
 
         }
@@ -109,13 +121,17 @@ public class Game {
                 }
             }
 
-            // Vérifiez si la partie doit être sauvegardée
+            // Verify if the game should be save
             if (Save.AskToSave()) {
+                Save.clearFile();
                 Save.WriteToFile(grid);
-                return; // Quittez la partie après la sauvegarde
+                return;
             }
 
-
+            // Manage the easteregg
+            if (Menuu.esteregg) {
+                EsterEgg.storm();
+            }
         }
 
     }
