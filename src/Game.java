@@ -83,7 +83,6 @@ public class Game {
                         i++;
                     }
                 }
-                Grid.see_grid(grid);
                 System.out.println("It's your turn " + Nickname.nicknames.get(i) + " " + liste_emoji[i]);
                 String s = "" + (i + 1);
                 Move.move_player(grid, Grid.playerPositions[i], s.charAt(0));
