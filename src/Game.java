@@ -53,7 +53,7 @@ public class Game {
             if (Menuu.esteregg) {
                 EsterEgg.allwalker(500);
             }
-            for (byte i = 0; i < Grid.number_player; i++) {
+            for (byte i = 0; i < number_player; i++) {
                 String s = "" + (i + 1);
                 Grid.place_players(grid, player_position[i], s.charAt(0));
             }
@@ -62,14 +62,14 @@ public class Game {
 
 
         while (end) {
-            for (int i = 0; i < Grid.number_player; i++) {
+            for (int i = 0; i < number_player; i++) {
                 // Passez au joueur suivant si le joueur est éliminé
                 if (!eliminate_player.contains(i)) {
                     // Affichez la grille
                     Grid.see_grid(grid);
 
                     // Vérifiez si le joueur est bloqué
-                    if (No_Move.detection(grid, Grid.playerPositions[i])) {
+                    if (No_Move.detection(grid, player_position[i])) {
                         System.out.println("Le joueur " + Nickname.nicknames.get(i) + " est bloqué !");
                         win = false;
                         player = Nickname.nicknames.get(i);
@@ -79,9 +79,9 @@ public class Game {
                         eliminate_player.add(i);
 
                         // Vérifiez si un seul joueur reste en jeu
-                        if (eliminate_player.size() == Grid.number_player - 1) {
+                        if (eliminate_player.size() == number_player - 1) {
                             win = true;
-                            player = Nickname.nicknames.get((i + 1) % Grid.number_player); // Trouvez le joueur gagnant
+                            player = Nickname.nicknames.get((i + 1) % number_player); // Trouvez le joueur gagnant
                             Score.main(null);
                             System.out.println("La partie est terminée ! Le joueur " + player + " gagne !");
                             end = false;
@@ -91,7 +91,7 @@ public class Game {
                         // Tour du joueur
                         System.out.println("C'est votre tour " + Nickname.nicknames.get(i) + " " + liste_emoji[i]);
                         String s = "" + (i + 1);
-                        Move.move_player(grid, Grid.playerPositions[i], s.charAt(0));
+                        Move.move_player(grid, player_position[i], s.charAt(0));
 
                         // Affichez la grille après le déplacement
                         Grid.see_grid(grid);
@@ -100,7 +100,7 @@ public class Game {
                         Destroy.PlaceTheBomb(grid, Destroy.AskToDestroy());
 
                         // Vérifiez à nouveau si le joueur est bloqué après son mouvement
-                        if (No_Move.detection(grid, Grid.playerPositions[i])) {
+                        if (No_Move.detection(grid, player_position[i])) {
                             System.out.println("Le joueur " + Nickname.nicknames.get(i) + " est maintenant bloqué !");
                             win = false;
                             player = Nickname.nicknames.get(i);
@@ -115,9 +115,9 @@ public class Game {
             }
             if (Menuu.esteregg) {
                 EsterEgg.storm();
-                for (byte p = 0; p < Grid.number_player; p++) {
+                for (byte p = 0; p < number_player; p++) {
                     String l = "" + (p + 1);
-                    Grid.place_players(grid, Grid.playerPositions[p], l.charAt(0));
+                    Grid.place_players(grid, player_position[p], l.charAt(0));
                 }
             }
 
