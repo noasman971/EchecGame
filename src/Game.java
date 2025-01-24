@@ -18,6 +18,22 @@ public class Game {
      * and checks for a winner. It also allows saving the game and using Easter eggs.
      *
      */
+
+    private static void initializePlayerPositions() {
+        player_position = new byte[number_player][2];
+
+        // Attribuer les positions prédéfinies
+        byte[] j1 = {(byte) (Grid.height / 2 - 2), (byte) (Grid.width / 2)};
+        byte[] j2 = {(byte) (Grid.height / 2 - 1), (byte) (Grid.width / 2)};
+        byte[] j3 = {(byte) (Grid.height / 2 + 1), (byte) (Grid.width / 2)};
+        byte[] j4 = {(byte) (Grid.height / 2 + 2), (byte) (Grid.width / 2)};
+
+        player_position[0] = j1;
+        player_position[1] = j2;
+        if (number_player > 2) player_position[2] = j3;
+        if (number_player > 3) player_position[3] = j4;
+    }
+
     public static void Setup() {
         char fill = '0';
         if (Menuu.esteregg) {
@@ -37,12 +53,11 @@ public class Game {
 
 
         } else {
-            load = false;
             grid = Grid.grid;
             number_player = Grid.number_player;
             Nickname.main(null);
             player_position = Grid.playerPositions;
-
+            initializePlayerPositions();
         }
 
         boolean end = true;
@@ -67,9 +82,22 @@ public class Game {
 
         while (end) {
             for (int i = 0; i < number_player; i++) {
-                // if player eliminate the next player play
+                if (eliminate_player.size() == number_player - 1) {
+                    win = true;
+                    for (int j = 0; j < number_player; j++) {
+                        if (!eliminate_player.contains(j)) {
+                            player = Nickname.nicknames.get(j); // Récupérer le pseudo du gagnant
+                            break;
+                        }
+                    }
+                    Score.main(null);
+                    System.out.println("La partie est terminée ! Le joueur " + player + " gagne !");
+                    end = false;
+                    break;
+                }
+                // Passez au joueur suivant si le joueur est éliminé
                 if (!eliminate_player.contains(i)) {
-
+                    // Affichez la grille
                     Grid.see_grid(grid);
 
                     // Verify if the player is blocked

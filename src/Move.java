@@ -28,37 +28,40 @@ public class Move {
         System.out.println("Choose the direction in which you want to move:");
         Scanner input = new Scanner(System.in);
         String enter_user = input.nextLine();
-        byte count = 0;
-        for (int i = 0; i < alldir.length; i++) {
-            if (alldir[i].dir.equals(enter_user)) {
-                player[0] += alldir[i].move_coordonne[0];
-                player[1] += alldir[i].move_coordonne[1];
-                if (grid[player[0]][player[1]] == '0') {
-                    Grid.place_players(grid, player, num_player);
-                    player[0] -= alldir[i].move_coordonne[0];
-                    player[1] -= alldir[i].move_coordonne[1];
-                    Grid.place_players(grid, player, '0' );
-                    player[0] += alldir[i].move_coordonne[0];
-                    player[1] += alldir[i].move_coordonne[1];
+        boolean validMove = false; // Pour vérifier si le déplacement est valide
 
-                }
-                else {
-                    player[0] -= alldir[i].move_coordonne[0];
-                    player[1] -= alldir[i].move_coordonne[1];
-                    System.out.println("Your chosen position is already occupied.");
-                    move_player(grid, player, num_player);
-                }
-            }
-            if (!alldir[i].dir.equals(enter_user)) {
-                count++;
-            }
-            if (count == 4) {
-                move_player(grid, player, num_player);
-            }
+        for (Direction direction : alldir) {
+            if (direction.dir.equals(enter_user)) {
+                // Calcule la nouvelle position
+                byte newRow = (byte) (player[0] + direction.move_coordonne[0]);
+                byte newCol = (byte) (player[1] + direction.move_coordonne[1]);
 
+                // Vérifie si la nouvelle position est dans les limites de la grille
+                if (newRow >= 0 && newRow < grid.length && newCol >= 0 && newCol < grid[0].length) {
+                    // Vérifie si la nouvelle position est libre
+                    if (grid[newRow][newCol] == '0') {
+                        // Met à jour la position
+                        Grid.place_players(grid, player, '0'); // Supprime l'ancien joueur
+                        player[0] = newRow;
+                        player[1] = newCol;
+                        Grid.place_players(grid, player, num_player); // Place le joueur à la nouvelle position
+                        validMove = true;
+                    } else {
+                        System.out.println("Your chosen position is already occupied.");
+                    }
+                } else {
+                    System.out.println("You cannot move outside the grid.");
+                }
+                break;
+            }
         }
 
+        if (!validMove) {
+            System.out.println("Invalid direction. Try again.");
+            move_player(grid, player, num_player); // Relance pour une nouvelle tentative
+        }
     }
+
     public static void main(String[] args) {
 //        Grid.main(args);
         //move_player(Grid.grid, Grid.j1, "");
