@@ -57,7 +57,8 @@ public class Game {
             number_player = Grid.number_player;
             Nickname.main(null);
             player_position = Grid.playerPositions;
-            initializePlayerPositions();
+
+
         }
 
         boolean end = true;
@@ -92,6 +93,9 @@ public class Game {
                     }
                     Score.main(null);
                     System.out.println("La partie est terminée ! Le joueur " + player + " gagne !");
+                    if (!Menuu.esteregg) {
+                        initializePlayerPositions();
+                    }
                     end = false;
                     break;
                 }
@@ -145,14 +149,15 @@ public class Game {
                     }
 
                 }
-            }
-            if (Menuu.esteregg) {
-                EsterEgg.storm();
-                for (byte p = 0; p < number_player; p++) {
-                    String l = "" + (p + 1);
-                    Grid.place_players(grid, player_position[p], l.charAt(0));
+                if (Menuu.esteregg) {
+                    EsterEgg.storm();
+                    for (byte p = 0; p < number_player; p++) {
+                        String l = "" + (p + 1);
+                        Grid.place_players(grid, player_position[p], l.charAt(0));
+                    }
                 }
             }
+
 
             // Verify if the game should be save
             if (Save.AskToSave()) {
